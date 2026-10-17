@@ -100,17 +100,18 @@ struct HistoryCard: View {
                 .italic()
         }
         .padding(16)
+        .frame(maxWidth: .infinity, alignment: .leading)
         .background(
-            ZStack {
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(.ultraThinMaterial)
-                RoundedRectangle(cornerRadius: 16)
-                    .fill(Color.black.opacity(0.20))
-            }
-        )
-        .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .stroke(Color.white.opacity(0.22), lineWidth: 1)
+                .fill(.ultraThinMaterial)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .fill(Color.black.opacity(0.20))
+                )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 16)
+                        .stroke(Color.white.opacity(0.22), lineWidth: 1)
+                )
         )
     }
 }
@@ -181,19 +182,20 @@ struct HistoryDetailView: View {
                         .foregroundColor(.white.opacity(0.6))
                 }
                 .padding(28)
+                .frame(maxWidth: .infinity)
                 .background(
-                    ZStack {
-                        RoundedRectangle(cornerRadius: 24)
-                            .fill(.ultraThinMaterial)
-                        RoundedRectangle(cornerRadius: 24)
-                            .fill(Color.black.opacity(0.22))
-                    }
-                )
-                .overlay(
                     RoundedRectangle(cornerRadius: 24)
-                        .stroke(Color.white.opacity(0.28), lineWidth: 1)
+                        .fill(.ultraThinMaterial)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 24)
+                                .fill(Color.black.opacity(0.22))
+                        )
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 24)
+                                .stroke(Color.white.opacity(0.28), lineWidth: 1)
+                        )
+                        .shadow(color: .black.opacity(0.25), radius: 20, y: 10)
                 )
-                .shadow(color: .black.opacity(0.25), radius: 20, y: 10)
                 .padding(.horizontal, 20)
 
                 // Share as Image button
