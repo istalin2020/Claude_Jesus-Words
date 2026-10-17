@@ -172,6 +172,46 @@ class WallpaperManager: ObservableObject {
             subtitle: "Living waters flow here",
             tamilSubtitle: "உயிர்தரும் நீர் பாயும் இடம்",
             imageName: "WallpaperGardenOfGrace"
+        ),
+        Wallpaper(
+            id: "wallpaper_little_blessings",
+            name: "Little Blessings",
+            tamilName: "சிறு ஆசிகள்",
+            subtitle: "Joy carried on heart balloons",
+            tamilSubtitle: "இதயத்தில் பறக்கும் மகிழ்ச்சி",
+            imageName: "WallpaperLittleBlessings"
+        ),
+        Wallpaper(
+            id: "wallpaper_lavender_grace",
+            name: "Lavender Grace",
+            tamilName: "இளம் ஊதா அருள்",
+            subtitle: "Gentle paths of grace",
+            tamilSubtitle: "அருளின் மெல்லிய பாதை",
+            imageName: "WallpaperLavenderGrace"
+        ),
+        Wallpaper(
+            id: "wallpaper_friends_on_high",
+            name: "Friends on High",
+            tamilName: "விண்ணக நண்பர்கள்",
+            subtitle: "Rising together in joy",
+            tamilSubtitle: "மகிழ்ச்சியில் ஒன்றாய் உயர்வோம்",
+            imageName: "WallpaperFriendsOnHigh"
+        ),
+        Wallpaper(
+            id: "wallpaper_smiling_skies",
+            name: "Smiling Skies",
+            tamilName: "புன்னகைக்கும் வானம்",
+            subtitle: "A world full of joy",
+            tamilSubtitle: "மகிழ்ச்சி நிறைந்த உலகம்",
+            imageName: "WallpaperSmilingSkies"
+        ),
+        Wallpaper(
+            id: "wallpaper_stacked_joy",
+            name: "Stacked Joy",
+            tamilName: "அடுக்கிய மகிழ்ச்சி",
+            subtitle: "Blessings piled high",
+            tamilSubtitle: "அடுக்கடுக்கான ஆசிகள்",
+            imageName: "WallpaperStackedJoy"
         )
     ]
 
