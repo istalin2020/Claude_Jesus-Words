@@ -8,6 +8,7 @@ struct ShareImageView: View {
     let size: CGSize
     let appIconImage: UIImage?
     var language: AppLanguage = .english
+    var wallpaper: Wallpaper? = nil
 
     private var displayQuote: String {
         if language == .tamil, let tq = word.tamilQuote { return tq }
@@ -40,9 +41,23 @@ struct ShareImageView: View {
 
     var body: some View {
         ZStack {
-            themeBackground
-            decorativeOverlays
-            lightRaysEffect
+            if let wallpaper = wallpaper {
+                wallpaperBackground(wallpaper)
+                // Soft dark gradient overlay for text readability
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.black.opacity(0.15),
+                        Color.black.opacity(0.35),
+                        Color.black.opacity(0.15)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            } else {
+                themeBackground
+                decorativeOverlays
+                lightRaysEffect
+            }
             contentLayout
         }
         .frame(width: size.width, height: size.height)
@@ -56,6 +71,14 @@ struct ShareImageView: View {
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
+    }
+
+    private func wallpaperBackground(_ wallpaper: Wallpaper) -> some View {
+        Image(wallpaper.imageName)
+            .resizable()
+            .scaledToFill()
+            .frame(width: size.width, height: size.height)
+            .clipped()
     }
 
     // MARK: - Decorative Overlays
@@ -270,20 +293,20 @@ struct ShareImageRenderer {
     }
 
     @MainActor
-    static func renderImage(word: JesusWord, theme: AppTheme, language: AppLanguage = .english) -> UIImage? {
+    static func renderImage(word: JesusWord, theme: AppTheme, language: AppLanguage = .english, wallpaper: Wallpaper? = nil) -> UIImage? {
         let size = CGSize(width: 1080, height: 1080)
         let appIcon = loadAppIcon()
-        let view = ShareImageView(word: word, theme: theme, size: size, appIconImage: appIcon, language: language)
+        let view = ShareImageView(word: word, theme: theme, size: size, appIconImage: appIcon, language: language, wallpaper: wallpaper)
         let renderer = ImageRenderer(content: view)
         renderer.scale = 1.0
         return renderer.uiImage
     }
 
     @MainActor
-    static func renderSquareImage(word: JesusWord, theme: AppTheme, language: AppLanguage = .english) -> UIImage? {
+    static func renderSquareImage(word: JesusWord, theme: AppTheme, language: AppLanguage = .english, wallpaper: Wallpaper? = nil) -> UIImage? {
         let size = CGSize(width: 1080, height: 1080)
         let appIcon = loadAppIcon()
-        let view = ShareImageView(word: word, theme: theme, size: size, appIconImage: appIcon, language: language)
+        let view = ShareImageView(word: word, theme: theme, size: size, appIconImage: appIcon, language: language, wallpaper: wallpaper)
         let renderer = ImageRenderer(content: view)
         renderer.scale = 1.0
         return renderer.uiImage

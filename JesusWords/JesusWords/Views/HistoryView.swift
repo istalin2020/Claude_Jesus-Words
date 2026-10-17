@@ -184,7 +184,8 @@ struct HistoryDetailView: View {
                     if let rendered = ShareImageRenderer.renderImage(
                         word: entry.word,
                         theme: viewModel.selectedTheme,
-                        language: viewModel.selectedLanguage
+                        language: viewModel.selectedLanguage,
+                        wallpaper: viewModel.selectedWallpaper
                     ) {
                         shareableImage = ShareableImage(image: rendered)
                     }

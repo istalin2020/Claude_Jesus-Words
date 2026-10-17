@@ -101,7 +101,8 @@ struct HomeView: View {
                                let rendered = ShareImageRenderer.renderImage(
                                 word: word,
                                 theme: viewModel.selectedTheme,
-                                language: viewModel.selectedLanguage
+                                language: viewModel.selectedLanguage,
+                                wallpaper: viewModel.selectedWallpaper
                             ) {
                                 shareableImage = ShareableImage(image: rendered)
                             }

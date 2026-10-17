@@ -13,6 +13,7 @@ class WordsViewModel: ObservableObject {
     @Published var reminderHour: Int = 7
     @Published var reminderMinute: Int = 0
     @Published var themeManager = ThemeManager.shared
+    @Published var wallpaperManager = WallpaperManager.shared
     @Published var selectedLanguage: AppLanguage = .english
 
     private let historyKey = "viewedWordsHistory"
@@ -32,6 +33,15 @@ class WordsViewModel: ObservableObject {
 
     func selectTheme(_ theme: AppTheme) {
         themeManager.selectedThemeId = theme.id
+        objectWillChange.send()
+    }
+
+    var selectedWallpaper: Wallpaper {
+        wallpaperManager.selectedWallpaper
+    }
+
+    func selectWallpaper(_ wallpaper: Wallpaper) {
+        wallpaperManager.selectedWallpaperId = wallpaper.id
         objectWillChange.send()
     }
 

@@ -16,8 +16,11 @@ struct ContentView: View {
                 ThemeView()
                     .tag(2)
 
-                SettingsView()
+                WallpapersView()
                     .tag(3)
+
+                SettingsView()
+                    .tag(4)
             }
             .tabViewStyle(.page(indexDisplayMode: .never))
 
@@ -26,16 +29,17 @@ struct ContentView: View {
                 tabButton(icon: "house.fill", label: "Today", tag: 0)
                 tabButton(icon: "clock.fill", label: "History", tag: 1)
                 tabButton(icon: "paintpalette.fill", label: "Themes", tag: 2)
-                tabButton(icon: "gearshape.fill", label: "Settings", tag: 3)
+                tabButton(icon: "photo.stack.fill", label: "Wallpapers", tag: 3)
+                tabButton(icon: "gearshape.fill", label: "Settings", tag: 4)
             }
-            .padding(.horizontal, 16)
+            .padding(.horizontal, 10)
             .padding(.vertical, 12)
             .background(
                 RoundedRectangle(cornerRadius: 25)
                     .fill(.ultraThinMaterial)
                     .shadow(color: .black.opacity(0.2), radius: 10, y: 5)
             )
-            .padding(.horizontal, 24)
+            .padding(.horizontal, 16)
             .padding(.bottom, 20)
         }
     }
@@ -43,7 +47,7 @@ struct ContentView: View {
     private var isTamil: Bool { viewModel.selectedLanguage == .tamil }
 
     private func tabButton(icon: String, label: String, tag: Int) -> some View {
-        let tamilLabels = ["இன்று", "வரலாறு", "தீம்கள்", "அமைப்புகள்"]
+        let tamilLabels = ["இன்று", "வரலாறு", "தீம்கள்", "வால்பேப்பர்", "அமைப்புகள்"]
         let displayLabel = isTamil ? tamilLabels[tag] : label
         return Button(action: {
             withAnimation(.easeInOut(duration: 0.2)) {
@@ -55,6 +59,8 @@ struct ContentView: View {
                     .font(.system(size: 18))
                 Text(displayLabel)
                     .font(.system(size: 10, weight: .medium))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.7)
             }
             .foregroundColor(selectedTab == tag ? .white : .white.opacity(0.5))
             .frame(maxWidth: .infinity)
