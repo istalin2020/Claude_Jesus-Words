@@ -101,8 +101,16 @@ struct HistoryCard: View {
         }
         .padding(16)
         .background(
+            ZStack {
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(.ultraThinMaterial)
+                RoundedRectangle(cornerRadius: 16)
+                    .fill(Color.black.opacity(0.20))
+            }
+        )
+        .overlay(
             RoundedRectangle(cornerRadius: 16)
-                .fill(.ultraThinMaterial)
+                .stroke(Color.white.opacity(0.22), lineWidth: 1)
         )
     }
 }
@@ -174,9 +182,18 @@ struct HistoryDetailView: View {
                 }
                 .padding(28)
                 .background(
-                    RoundedRectangle(cornerRadius: 24)
-                        .fill(.ultraThinMaterial)
+                    ZStack {
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(.ultraThinMaterial)
+                        RoundedRectangle(cornerRadius: 24)
+                            .fill(Color.black.opacity(0.22))
+                    }
                 )
+                .overlay(
+                    RoundedRectangle(cornerRadius: 24)
+                        .stroke(Color.white.opacity(0.28), lineWidth: 1)
+                )
+                .shadow(color: .black.opacity(0.25), radius: 20, y: 10)
                 .padding(.horizontal, 20)
 
                 // Share as Image button

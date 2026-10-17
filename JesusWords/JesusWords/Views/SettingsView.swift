@@ -60,8 +60,16 @@ struct SettingsView: View {
                     }
                     .padding(20)
                     .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.ultraThinMaterial)
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.black.opacity(0.22))
+                        }
+                    )
+                    .overlay(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(.ultraThinMaterial)
+                            .stroke(Color.white.opacity(0.28), lineWidth: 1)
                     )
                     .padding(.horizontal, 16)
 
@@ -106,8 +114,16 @@ struct SettingsView: View {
                     }
                     .padding(20)
                     .background(
+                        ZStack {
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.ultraThinMaterial)
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(Color.black.opacity(0.22))
+                        }
+                    )
+                    .overlay(
                         RoundedRectangle(cornerRadius: 20)
-                            .fill(.ultraThinMaterial)
+                            .stroke(Color.white.opacity(0.28), lineWidth: 1)
                     )
                     .padding(.horizontal, 16)
 
