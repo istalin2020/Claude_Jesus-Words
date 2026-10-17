@@ -32,17 +32,14 @@ struct LanguageTipView: View {
                 .onTapGesture { dismiss() }
 
             VStack(spacing: 0) {
-                arrowToToggle
-                    .padding(.trailing, 36)
-                    .padding(.top, 4)
-
-                tipCard
-                    .padding(.horizontal, 24)
-                    .padding(.top, 20)
+                // Angel floats above the card and overlaps its top-left corner,
+                // with her pointing arm extending toward the language toggle.
+                tipCardWithAngel
+                    .padding(.horizontal, 20)
+                    .padding(.top, 80)
 
                 Spacer()
             }
-            .padding(.top, 60)
             .opacity(appeared ? 1 : 0)
             .scaleEffect(appeared ? 1.0 : 0.9)
             .animation(.spring(response: 0.5, dampingFraction: 0.75), value: appeared)
@@ -50,43 +47,36 @@ struct LanguageTipView: View {
         .onAppear { appeared = true }
     }
 
-    // MARK: - Arrow
+    // MARK: - Card + angel assembly
 
-    private var arrowToToggle: some View {
-        HStack {
-            Spacer()
-            CurvedArrowShape()
-                .stroke(
-                    LinearGradient(
-                        colors: [goldLight, goldDark],
-                        startPoint: .bottomLeading, endPoint: .topTrailing
-                    ),
-                    style: StrokeStyle(lineWidth: 4, lineCap: .round, lineJoin: .round)
-                )
-                .frame(width: 140, height: 110)
-                .overlay(
-                    // arrowhead
-                    Image(systemName: "arrowtriangle.right.fill")
-                        .foregroundColor(goldDark)
-                        .font(.system(size: 18))
-                        .rotationEffect(.degrees(-50))
-                        .offset(x: 60, y: -40)
-                )
-                .shadow(color: goldDark.opacity(0.5), radius: 6)
-        }
+    private var tipCardWithAngel: some View {
+        tipCard
+            .overlay(alignment: .topLeading) {
+                Image("TipAngel")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 180, height: 150)
+                    // Pull up and slightly left so she perches on the top-left of the card
+                    .offset(x: -20, y: -90)
+                    .shadow(color: goldDark.opacity(0.4), radius: 10, y: 4)
+                    .accessibilityHidden(true)
+            }
     }
 
     // MARK: - Tip card
 
     private var tipCard: some View {
         VStack(spacing: 14) {
+            // Leave visual room for the angel's head over the top-left corner
             HStack(spacing: 10) {
+                Spacer().frame(width: 60) // reserved for angel
                 Image(systemName: "lightbulb.fill")
                     .font(.system(size: 26))
                     .foregroundColor(goldDark)
                 Text(tipLabel)
                     .font(.system(size: 24, weight: .bold, design: .serif))
                     .foregroundColor(goldDark)
+                Spacer(minLength: 0)
             }
             .padding(.top, 4)
 
@@ -129,22 +119,23 @@ struct LanguageTipView: View {
             .padding(.bottom, 4)
         }
         .padding(.horizontal, 24)
-        .padding(.vertical, 24)
+        .padding(.top, 32)
+        .padding(.bottom, 24)
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 24, style: .continuous)
                 .fill(cream)
-                .shadow(color: goldDark.opacity(0.35), radius: 24, y: 10)
-        )
-        .overlay(
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .stroke(
-                    LinearGradient(
-                        colors: [goldLight, gold.opacity(0.4)],
-                        startPoint: .topLeading, endPoint: .bottomTrailing
-                    ),
-                    lineWidth: 2
+                .overlay(
+                    RoundedRectangle(cornerRadius: 24, style: .continuous)
+                        .stroke(
+                            LinearGradient(
+                                colors: [goldLight, gold.opacity(0.4)],
+                                startPoint: .topLeading, endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 2
+                        )
                 )
+                .shadow(color: goldDark.opacity(0.35), radius: 24, y: 10)
         )
     }
 
@@ -155,19 +146,5 @@ struct LanguageTipView: View {
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
             onDismiss()
         }
-    }
-}
-
-// Curved arrow from the card up and to the right (toward the language toggle)
-private struct CurvedArrowShape: Shape {
-    func path(in rect: CGRect) -> Path {
-        var p = Path()
-        let start = CGPoint(x: rect.minX, y: rect.maxY)
-        let end = CGPoint(x: rect.maxX - 10, y: rect.minY + 10)
-        let control1 = CGPoint(x: rect.minX + rect.width * 0.1, y: rect.minY + rect.height * 0.1)
-        let control2 = CGPoint(x: rect.midX, y: rect.minY)
-        p.move(to: start)
-        p.addCurve(to: end, control1: control1, control2: control2)
-        return p
     }
 }
