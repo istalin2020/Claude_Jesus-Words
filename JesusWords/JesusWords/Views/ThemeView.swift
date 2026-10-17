@@ -73,9 +73,15 @@ struct ThemeView: View {
         .padding(.horizontal, 16)
     }
 
+    // Picture themes first, older gradient themes after.
+    private var orderedThemes: [AppTheme] {
+        let all = viewModel.themeManager.allThemes
+        return all.filter { $0.backgroundImageName != nil } + all.filter { $0.backgroundImageName == nil }
+    }
+
     private var themeGridSection: some View {
         LazyVGrid(columns: columns, spacing: 14) {
-            ForEach(viewModel.themeManager.allThemes) { theme in
+            ForEach(orderedThemes) { theme in
                 ThemePreviewCard(
                     theme: theme,
                     isSelected: theme.id == viewModel.selectedTheme.id,
