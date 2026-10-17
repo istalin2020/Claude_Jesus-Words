@@ -86,6 +86,7 @@ struct WallpapersView: View {
                     isAnimating: selectedAnimation == wallpaper.id,
                     isTamil: isTamil
                 )
+                .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 .onTapGesture {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
                         selectedAnimation = wallpaper.id
@@ -167,6 +168,7 @@ struct WallpaperPreviewCard: View {
                 Image(wallpaper.imageName)
                     .resizable()
                     .scaledToFill()
+                    .allowsHitTesting(false)
             )
             .clipped()
     }

@@ -86,15 +86,12 @@ struct HomeView: View {
                                 .foregroundColor(.white.opacity(0.85))
                                 .italic()
                         }
+                        .shadow(color: .black.opacity(0.6), radius: 3)
                         .padding(28)
                         .frame(maxWidth: .infinity)
                         .background(
                             RoundedRectangle(cornerRadius: 24)
-                                .fill(.ultraThinMaterial)
-                                .overlay(
-                                    RoundedRectangle(cornerRadius: 24)
-                                        .fill(Color.black.opacity(0.22))
-                                )
+                                .fill(Color.black.opacity(0.18))
                                 .overlay(
                                     RoundedRectangle(cornerRadius: 24)
                                         .stroke(Color.white.opacity(0.28), lineWidth: 1)

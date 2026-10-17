@@ -81,6 +81,7 @@ struct ThemeView: View {
                     isSelected: theme.id == viewModel.selectedTheme.id,
                     isAnimating: selectedAnimation == theme.id
                 )
+                .contentShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
                 .onTapGesture {
                     withAnimation(.spring(response: 0.4, dampingFraction: 0.7)) {
                         selectedAnimation = theme.id
@@ -188,6 +189,7 @@ struct ThemePreviewCard: View {
                         Image(imageName)
                             .resizable()
                             .scaledToFill()
+                            .allowsHitTesting(false)
                     )
                     .clipped()
                 Color.black.opacity(0.15)

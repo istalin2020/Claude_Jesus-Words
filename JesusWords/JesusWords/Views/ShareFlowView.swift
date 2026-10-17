@@ -108,6 +108,7 @@ struct ShareFlowView: View {
                 HStack(spacing: 12) {
                     ForEach(viewModel.wallpaperManager.allWallpapers) { wallpaper in
                         wallpaperThumb(wallpaper: wallpaper)
+                            .contentShape(Rectangle())
                             .onTapGesture {
                                 withAnimation(.easeInOut(duration: 0.25)) {
                                     localWallpaperId = wallpaper.id
@@ -128,6 +129,7 @@ struct ShareFlowView: View {
             Image(wallpaper.imageName)
                 .resizable()
                 .scaledToFill()
+                .allowsHitTesting(false)
                 .frame(width: 72, height: 96)
                 .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
                 .overlay(
