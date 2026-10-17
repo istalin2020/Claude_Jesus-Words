@@ -379,6 +379,96 @@ class ThemeManager: ObservableObject {
             decorativeIcon: "sparkles",
             overlayElements: [],
             backgroundImageName: "ThemeResurrectionGlory"
+        ),
+
+        // 18. Tree of Life - Golden tree with waterfalls
+        AppTheme(
+            id: "tree_of_life",
+            name: "Tree of Life",
+            subtitle: "Heavenly tree of eternal life",
+            gradientColors: [
+                Color(red: 1.0, green: 0.92, blue: 0.65),
+                Color(red: 0.90, green: 0.75, blue: 0.45),
+                Color(red: 0.55, green: 0.70, blue: 0.65),
+                Color(red: 0.25, green: 0.45, blue: 0.55)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.70),
+            fontDesign: .serif,
+            decorativeIcon: "tree.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperTreeOfLife"
+        ),
+
+        // 19. New Jerusalem - Heavenly golden city
+        AppTheme(
+            id: "new_jerusalem",
+            name: "New Jerusalem",
+            subtitle: "The holy city above the clouds",
+            gradientColors: [
+                Color(red: 1.0, green: 0.95, blue: 0.80),
+                Color(red: 0.95, green: 0.85, blue: 0.55),
+                Color(red: 0.85, green: 0.75, blue: 0.45),
+                Color(red: 0.50, green: 0.55, blue: 0.65)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.75),
+            fontDesign: .serif,
+            decorativeIcon: "building.columns.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperNewJerusalem"
+        ),
+
+        // 20. Still Waters - Peaceful lake sunrise
+        AppTheme(
+            id: "still_waters",
+            name: "Still Waters",
+            subtitle: "He restores my soul",
+            gradientColors: [
+                Color(red: 0.65, green: 0.80, blue: 0.95),
+                Color(red: 0.95, green: 0.80, blue: 0.60),
+                Color(red: 0.80, green: 0.75, blue: 0.65),
+                Color(red: 0.40, green: 0.55, blue: 0.70)
+            ],
+            accentColor: Color(red: 0.95, green: 0.90, blue: 0.80),
+            fontDesign: .serif,
+            decorativeIcon: "water.waves",
+            overlayElements: [],
+            backgroundImageName: "WallpaperStillWaters"
+        ),
+
+        // 21. Star of Bethlehem - Night sky over Bethlehem
+        AppTheme(
+            id: "star_of_bethlehem",
+            name: "Star of Bethlehem",
+            subtitle: "A light shining in the darkness",
+            gradientColors: [
+                Color(red: 0.10, green: 0.15, blue: 0.40),
+                Color(red: 0.08, green: 0.12, blue: 0.30),
+                Color(red: 0.15, green: 0.15, blue: 0.35),
+                Color(red: 0.05, green: 0.08, blue: 0.20)
+            ],
+            accentColor: Color(red: 1.0, green: 0.90, blue: 0.60),
+            fontDesign: .serif,
+            decorativeIcon: "star.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperStarOfBethlehem"
+        ),
+
+        // 22. Rainbow Promise - Covenant rainbow over valley
+        AppTheme(
+            id: "rainbow_promise",
+            name: "Rainbow Promise",
+            subtitle: "God's covenant of mercy",
+            gradientColors: [
+                Color(red: 0.70, green: 0.85, blue: 0.95),
+                Color(red: 0.95, green: 0.80, blue: 0.85),
+                Color(red: 0.90, green: 0.85, blue: 0.60),
+                Color(red: 0.45, green: 0.70, blue: 0.75)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.85),
+            fontDesign: .serif,
+            decorativeIcon: "rainbow",
+            overlayElements: [],
+            backgroundImageName: "WallpaperRainbowPromise"
         )
     ]
 

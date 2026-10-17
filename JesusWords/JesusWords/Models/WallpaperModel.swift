@@ -68,6 +68,46 @@ class WallpaperManager: ObservableObject {
             subtitle: "New life at sunrise",
             tamilSubtitle: "விடியலில் புதிய வாழ்வு",
             imageName: "Wallpaper5"
+        ),
+        Wallpaper(
+            id: "wallpaper_tree_of_life",
+            name: "Tree of Life",
+            tamilName: "வாழ்வின் மரம்",
+            subtitle: "Heavenly golden tree with waterfalls",
+            tamilSubtitle: "நீர்வீழ்ச்சிகளுடன் வானுலகப் பொன் மரம்",
+            imageName: "WallpaperTreeOfLife"
+        ),
+        Wallpaper(
+            id: "wallpaper_new_jerusalem",
+            name: "New Jerusalem",
+            tamilName: "புதிய எருசலேம்",
+            subtitle: "Golden heavenly city above the clouds",
+            tamilSubtitle: "மேகங்களுக்கு மேல் பொன்னான வானக நகரம்",
+            imageName: "WallpaperNewJerusalem"
+        ),
+        Wallpaper(
+            id: "wallpaper_still_waters",
+            name: "Still Waters",
+            tamilName: "அமைதியான நீர்",
+            subtitle: "A peaceful lake at sunrise",
+            tamilSubtitle: "விடியலில் அமைதியான ஏரி",
+            imageName: "WallpaperStillWaters"
+        ),
+        Wallpaper(
+            id: "wallpaper_star_of_bethlehem",
+            name: "Star of Bethlehem",
+            tamilName: "பெத்லகேமின் விண்மீன்",
+            subtitle: "A radiant star over Bethlehem",
+            tamilSubtitle: "பெத்லகேமின் மேல் ஒளிவீசும் விண்மீன்",
+            imageName: "WallpaperStarOfBethlehem"
+        ),
+        Wallpaper(
+            id: "wallpaper_rainbow_promise",
+            name: "Rainbow Promise",
+            tamilName: "வானவில் வாக்குறுதி",
+            subtitle: "God's promise over the valley",
+            tamilSubtitle: "பள்ளத்தாக்கின் மேல் இறைவனின் வாக்குறுதி",
+            imageName: "WallpaperRainbowPromise"
         )
     ]
 
