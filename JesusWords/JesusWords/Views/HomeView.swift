@@ -8,7 +8,7 @@ struct ShareableImage: Identifiable {
 struct HomeView: View {
     @EnvironmentObject var viewModel: WordsViewModel
     @State private var isAnimating = false
-    @State private var shareableImage: ShareableImage? = nil
+    @State private var shareFlowWord: JesusWord? = nil
 
     var body: some View {
         ZStack {
@@ -97,14 +97,8 @@ struct HomeView: View {
                     // Share as Image Button
                     if viewModel.todaysWord != nil {
                         Button(action: {
-                            if let word = viewModel.todaysWord,
-                               let rendered = ShareImageRenderer.renderImage(
-                                word: word,
-                                theme: viewModel.selectedTheme,
-                                language: viewModel.selectedLanguage,
-                                wallpaper: viewModel.selectedWallpaper
-                            ) {
-                                shareableImage = ShareableImage(image: rendered)
+                            if let word = viewModel.todaysWord {
+                                shareFlowWord = word
                             }
                         }) {
                             HStack {
@@ -135,8 +129,9 @@ struct HomeView: View {
                 isAnimating = true
             }
         }
-        .sheet(item: $shareableImage) { item in
-            ShareSheet(activityItems: [item.image])
+        .fullScreenCover(item: $shareFlowWord) { word in
+            ShareFlowView(word: word, initialWallpaperId: viewModel.selectedWallpaper.id)
+                .environmentObject(viewModel)
         }
     }
 }

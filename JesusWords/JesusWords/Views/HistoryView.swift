@@ -111,7 +111,7 @@ struct HistoryDetailView: View {
     let entry: HistoryEntry
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var viewModel: WordsViewModel
-    @State private var shareableImage: ShareableImage? = nil
+    @State private var shareFlowWord: JesusWord? = nil
 
     var body: some View {
         ZStack {
@@ -181,14 +181,7 @@ struct HistoryDetailView: View {
 
                 // Share as Image button
                 Button(action: {
-                    if let rendered = ShareImageRenderer.renderImage(
-                        word: entry.word,
-                        theme: viewModel.selectedTheme,
-                        language: viewModel.selectedLanguage,
-                        wallpaper: viewModel.selectedWallpaper
-                    ) {
-                        shareableImage = ShareableImage(image: rendered)
-                    }
+                    shareFlowWord = entry.word
                 }) {
                     HStack {
                         Image(systemName: "photo.on.rectangle.angled")
@@ -204,8 +197,9 @@ struct HistoryDetailView: View {
                 Spacer()
             }
         }
-        .sheet(item: $shareableImage) { item in
-            ShareSheet(activityItems: [item.image])
+        .fullScreenCover(item: $shareFlowWord) { word in
+            ShareFlowView(word: word, initialWallpaperId: viewModel.selectedWallpaper.id)
+                .environmentObject(viewModel)
         }
     }
 }
