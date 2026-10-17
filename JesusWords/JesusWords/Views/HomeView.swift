@@ -9,6 +9,8 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: WordsViewModel
     @State private var isAnimating = false
     @State private var shareFlowWord: JesusWord? = nil
+    @AppStorage("hasSeenLanguageTip") private var hasSeenLanguageTip = false
+    @State private var showLanguageTip = false
 
     var body: some View {
         ZStack {
@@ -136,10 +138,25 @@ struct HomeView: View {
             withAnimation {
                 isAnimating = true
             }
+            if !hasSeenLanguageTip {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
+                    showLanguageTip = true
+                }
+            }
         }
         .fullScreenCover(item: $shareFlowWord) { word in
             ShareFlowView(word: word, initialWallpaperId: viewModel.selectedWallpaper.id)
                 .environmentObject(viewModel)
+        }
+        .overlay {
+            if showLanguageTip {
+                LanguageTipView(isTamil: viewModel.selectedLanguage == .tamil) {
+                    hasSeenLanguageTip = true
+                    showLanguageTip = false
+                }
+                .transition(.opacity)
+                .zIndex(100)
+            }
         }
     }
 }
