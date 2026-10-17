@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperPentecostLight.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperPentecostLight_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {
