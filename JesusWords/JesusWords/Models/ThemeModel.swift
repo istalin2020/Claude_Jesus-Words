@@ -469,6 +469,60 @@ class ThemeManager: ObservableObject {
             decorativeIcon: "rainbow",
             overlayElements: [],
             backgroundImageName: "WallpaperRainbowPromise"
+        ),
+
+        // 23. Easter Dawn - Empty tomb at pink sunrise
+        AppTheme(
+            id: "easter_dawn",
+            name: "Easter Dawn",
+            subtitle: "He is risen",
+            gradientColors: [
+                Color(red: 1.0, green: 0.80, blue: 0.75),
+                Color(red: 0.95, green: 0.70, blue: 0.65),
+                Color(red: 0.85, green: 0.60, blue: 0.60),
+                Color(red: 0.55, green: 0.35, blue: 0.40)
+            ],
+            accentColor: Color(red: 1.0, green: 0.92, blue: 0.85),
+            fontDesign: .serif,
+            decorativeIcon: "sunrise.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperEasterDawn"
+        ),
+
+        // 24. Crystal Paradise - Clear turquoise paradise waters
+        AppTheme(
+            id: "crystal_paradise",
+            name: "Crystal Paradise",
+            subtitle: "Clear waters of paradise",
+            gradientColors: [
+                Color(red: 0.85, green: 0.95, blue: 0.95),
+                Color(red: 0.55, green: 0.90, blue: 0.90),
+                Color(red: 0.30, green: 0.70, blue: 0.80),
+                Color(red: 0.15, green: 0.45, blue: 0.60)
+            ],
+            accentColor: Color(red: 0.90, green: 0.98, blue: 1.0),
+            fontDesign: .serif,
+            decorativeIcon: "water.waves",
+            overlayElements: [],
+            backgroundImageName: "WallpaperCrystalParadise"
+        ),
+
+        // 25. Pentecost Light - Dove in pink/purple clouds
+        AppTheme(
+            id: "pentecost_light",
+            name: "Pentecost Light",
+            subtitle: "The Spirit descends",
+            gradientColors: [
+                Color(red: 1.0, green: 0.90, blue: 0.95),
+                Color(red: 0.95, green: 0.80, blue: 0.95),
+                Color(red: 0.75, green: 0.65, blue: 0.90),
+                Color(red: 0.45, green: 0.35, blue: 0.65)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 1.0),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "WallpaperPentecostLight"
         )
     ]
 

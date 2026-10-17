@@ -108,6 +108,30 @@ class WallpaperManager: ObservableObject {
             subtitle: "God's promise over the valley",
             tamilSubtitle: "பள்ளத்தாக்கின் மேல் இறைவனின் வாக்குறுதி",
             imageName: "WallpaperRainbowPromise"
+        ),
+        Wallpaper(
+            id: "wallpaper_easter_dawn",
+            name: "Easter Dawn",
+            tamilName: "உயிர்த்தெழுதலின் விடியல்",
+            subtitle: "The tomb at sunrise",
+            tamilSubtitle: "விடியலில் வெற்றுக் கல்லறை",
+            imageName: "WallpaperEasterDawn"
+        ),
+        Wallpaper(
+            id: "wallpaper_crystal_paradise",
+            name: "Crystal Paradise",
+            tamilName: "படிகப் பரதீசு",
+            subtitle: "Clear waters of paradise",
+            tamilSubtitle: "பரதீசின் தெளிவான நீர்",
+            imageName: "WallpaperCrystalParadise"
+        ),
+        Wallpaper(
+            id: "wallpaper_pentecost_light",
+            name: "Pentecost Light",
+            tamilName: "பெந்தெகொஸ்தே ஒளி",
+            subtitle: "Spirit descending in glory",
+            tamilSubtitle: "மகிமையில் இறங்கும் தூய ஆவி",
+            imageName: "WallpaperPentecostLight"
         )
     ]
 
