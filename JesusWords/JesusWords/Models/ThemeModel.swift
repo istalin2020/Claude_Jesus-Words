@@ -523,6 +523,96 @@ class ThemeManager: ObservableObject {
             decorativeIcon: "sparkles",
             overlayElements: [],
             backgroundImageName: "WallpaperPentecostLight"
+        ),
+
+        // 26. Sacred Heart Cathedral - Red stained glass sanctuary
+        AppTheme(
+            id: "sacred_heart_cathedral",
+            name: "Sacred Heart Cathedral",
+            subtitle: "Sacred sanctuary of grace",
+            gradientColors: [
+                Color(red: 1.0, green: 0.85, blue: 0.60),
+                Color(red: 0.95, green: 0.55, blue: 0.45),
+                Color(red: 0.75, green: 0.20, blue: 0.25),
+                Color(red: 0.45, green: 0.10, blue: 0.15)
+            ],
+            accentColor: Color(red: 1.0, green: 0.90, blue: 0.75),
+            fontDesign: .serif,
+            decorativeIcon: "building.columns.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperSacredHeartCathedral"
+        ),
+
+        // 27. Crown of Glory - Purple heavenly throne
+        AppTheme(
+            id: "crown_of_glory",
+            name: "Crown of Glory",
+            subtitle: "Royal throne of heaven",
+            gradientColors: [
+                Color(red: 1.0, green: 0.90, blue: 0.95),
+                Color(red: 0.90, green: 0.80, blue: 0.95),
+                Color(red: 0.70, green: 0.60, blue: 0.90),
+                Color(red: 0.40, green: 0.30, blue: 0.70)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 1.0),
+            fontDesign: .serif,
+            decorativeIcon: "crown.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperCrownOfGlory"
+        ),
+
+        // 28. Nativity Star - Deep blue night with golden star
+        AppTheme(
+            id: "nativity_star",
+            name: "Nativity Star",
+            subtitle: "The star that led the wise",
+            gradientColors: [
+                Color(red: 0.60, green: 0.75, blue: 0.95),
+                Color(red: 0.25, green: 0.40, blue: 0.75),
+                Color(red: 0.10, green: 0.20, blue: 0.50),
+                Color(red: 0.05, green: 0.10, blue: 0.30)
+            ],
+            accentColor: Color(red: 1.0, green: 0.92, blue: 0.65),
+            fontDesign: .serif,
+            decorativeIcon: "star.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperNativityStar"
+        ),
+
+        // 29. Rose of Sharon - Pink roses archway
+        AppTheme(
+            id: "rose_of_sharon",
+            name: "Rose of Sharon",
+            subtitle: "Beauty of the Beloved",
+            gradientColors: [
+                Color(red: 1.0, green: 0.90, blue: 0.85),
+                Color(red: 1.0, green: 0.75, blue: 0.75),
+                Color(red: 0.95, green: 0.60, blue: 0.65),
+                Color(red: 0.70, green: 0.40, blue: 0.50)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.90),
+            fontDesign: .serif,
+            decorativeIcon: "camera.macro",
+            overlayElements: [],
+            backgroundImageName: "WallpaperRoseOfSharon"
+        ),
+
+        // 30. Garden of Grace - Green garden with cross and fountain
+        AppTheme(
+            id: "garden_of_grace",
+            name: "Garden of Grace",
+            subtitle: "Living waters flow here",
+            gradientColors: [
+                Color(red: 0.90, green: 0.95, blue: 0.80),
+                Color(red: 0.70, green: 0.85, blue: 0.65),
+                Color(red: 0.40, green: 0.70, blue: 0.50),
+                Color(red: 0.20, green: 0.45, blue: 0.35)
+            ],
+            accentColor: Color(red: 0.95, green: 1.0, blue: 0.90),
+            fontDesign: .serif,
+            decorativeIcon: "leaf.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperGardenOfGrace"
         )
     ]
 

@@ -132,6 +132,46 @@ class WallpaperManager: ObservableObject {
             subtitle: "Spirit descending in glory",
             tamilSubtitle: "மகிமையில் இறங்கும் தூய ஆவி",
             imageName: "WallpaperPentecostLight"
+        ),
+        Wallpaper(
+            id: "wallpaper_sacred_heart_cathedral",
+            name: "Sacred Heart Cathedral",
+            tamilName: "திருஇருதயத் திருக்கோயில்",
+            subtitle: "Sacred sanctuary of grace",
+            tamilSubtitle: "அருளின் புனிதக் கோயில்",
+            imageName: "WallpaperSacredHeartCathedral"
+        ),
+        Wallpaper(
+            id: "wallpaper_crown_of_glory",
+            name: "Crown of Glory",
+            tamilName: "மகிமையின் கிரீடம்",
+            subtitle: "Royal throne of heaven",
+            tamilSubtitle: "விண்ணரசின் அரியணை",
+            imageName: "WallpaperCrownOfGlory"
+        ),
+        Wallpaper(
+            id: "wallpaper_nativity_star",
+            name: "Nativity Star",
+            tamilName: "பிறப்பின் விண்மீன்",
+            subtitle: "The star that led the wise",
+            tamilSubtitle: "ஞானிகளை வழிநடத்திய விண்மீன்",
+            imageName: "WallpaperNativityStar"
+        ),
+        Wallpaper(
+            id: "wallpaper_rose_of_sharon",
+            name: "Rose of Sharon",
+            tamilName: "சாரோனின் ரோஜா",
+            subtitle: "Beauty of the Beloved",
+            tamilSubtitle: "அன்பருடைய அழகு",
+            imageName: "WallpaperRoseOfSharon"
+        ),
+        Wallpaper(
+            id: "wallpaper_garden_of_grace",
+            name: "Garden of Grace",
+            tamilName: "அருளின் தோட்டம்",
+            subtitle: "Living waters flow here",
+            tamilSubtitle: "உயிர்தரும் நீர் பாயும் இடம்",
+            imageName: "WallpaperGardenOfGrace"
         )
     ]
 
