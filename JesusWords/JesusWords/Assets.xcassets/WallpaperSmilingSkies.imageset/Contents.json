@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperSmilingSkies.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperSmilingSkies_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

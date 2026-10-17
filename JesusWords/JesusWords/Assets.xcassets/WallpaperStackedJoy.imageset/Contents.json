@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperStackedJoy.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperStackedJoy_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

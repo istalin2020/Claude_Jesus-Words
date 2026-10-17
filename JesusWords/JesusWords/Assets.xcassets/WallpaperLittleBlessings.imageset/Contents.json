@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperLittleBlessings.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperLittleBlessings_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

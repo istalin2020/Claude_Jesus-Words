@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperFriendsOnHigh.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperFriendsOnHigh_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

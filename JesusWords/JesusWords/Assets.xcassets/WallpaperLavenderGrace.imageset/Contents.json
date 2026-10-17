@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperLavenderGrace.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperLavenderGrace_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {
