@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperStarOfBethlehem.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperStarOfBethlehem_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

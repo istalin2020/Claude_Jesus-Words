@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperTreeOfLife.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperTreeOfLife_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

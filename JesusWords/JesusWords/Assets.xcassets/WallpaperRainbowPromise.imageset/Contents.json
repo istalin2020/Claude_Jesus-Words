@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperRainbowPromise.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperRainbowPromise_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

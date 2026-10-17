@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperNewJerusalem.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperNewJerusalem_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {
