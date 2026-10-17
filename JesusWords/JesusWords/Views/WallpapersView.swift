@@ -160,10 +160,14 @@ struct WallpaperPreviewCard: View {
     }
 
     private var previewImage: some View {
-        Image(wallpaper.imageName)
-            .resizable()
-            .scaledToFill()
+        Color.clear
+            .frame(maxWidth: .infinity)
             .frame(height: 160)
+            .overlay(
+                Image(wallpaper.imageName)
+                    .resizable()
+                    .scaledToFill()
+            )
             .clipped()
     }
 

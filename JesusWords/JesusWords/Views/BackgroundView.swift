@@ -99,11 +99,14 @@ struct ThemeBackgroundView: View {
     var body: some View {
         ZStack {
             if let imageName = theme.backgroundImageName {
-                // Image-based background
-                Image(imageName)
-                    .resizable()
-                    .scaledToFill()
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                // Color.clear takes exactly the proposed size; the image lives in an
+                // overlay so its scaled-to-fill size can never widen the layout.
+                Color.clear
+                    .overlay(
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFill()
+                    )
                     .clipped()
                     .ignoresSafeArea()
 

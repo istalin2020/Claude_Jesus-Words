@@ -183,9 +183,13 @@ struct ThemePreviewCard: View {
     private var previewImage: some View {
         ZStack {
             if let imageName = theme.backgroundImageName {
-                Image(imageName)
-                    .resizable()
-                    .scaledToFill()
+                Color.clear
+                    .overlay(
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFill()
+                    )
+                    .clipped()
                 Color.black.opacity(0.15)
                 centralIcon
             } else {
@@ -195,6 +199,7 @@ struct ThemePreviewCard: View {
                 lightRays
             }
         }
+        .frame(maxWidth: .infinity)
         .frame(height: 120)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
     }

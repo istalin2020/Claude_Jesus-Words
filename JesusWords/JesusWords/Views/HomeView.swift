@@ -27,8 +27,8 @@ struct HomeView: View {
                             viewModel.setLanguage(language)
                         }
                     }
-                    .padding(.trailing, 20)
-                    .padding(.top, 4)
+                    .padding(.trailing, 24)
+                    .padding(.top, 16)
 
                     // App Title (double-shadow keeps white legible on both dark and light backgrounds)
                     VStack(spacing: 4) {
