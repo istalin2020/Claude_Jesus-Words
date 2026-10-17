@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperSacredHeartCathedral.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperSacredHeartCathedral_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

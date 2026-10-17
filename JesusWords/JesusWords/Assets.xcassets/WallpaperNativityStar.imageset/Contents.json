@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperNativityStar.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperNativityStar_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperGardenOfGrace.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperGardenOfGrace_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

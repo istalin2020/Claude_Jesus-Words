@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperCrownOfGlory.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperCrownOfGlory_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {

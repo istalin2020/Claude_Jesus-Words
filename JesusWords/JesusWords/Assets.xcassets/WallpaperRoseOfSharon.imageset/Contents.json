@@ -3,6 +3,10 @@
     {
       "filename" : "WallpaperRoseOfSharon.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperRoseOfSharon_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {
