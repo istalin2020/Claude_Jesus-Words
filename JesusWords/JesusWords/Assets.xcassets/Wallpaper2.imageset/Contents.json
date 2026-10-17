@@ -3,6 +3,10 @@
     {
       "filename" : "Wallpaper2.png",
       "idiom" : "universal"
+    },
+    {
+      "filename" : "Wallpaper2_iPad.png",
+      "idiom" : "ipad"
     }
   ],
   "info" : {
