@@ -30,16 +30,18 @@ struct HomeView: View {
                     .padding(.trailing, 20)
                     .padding(.top, 4)
 
-                    // App Title
+                    // App Title (double-shadow keeps white legible on both dark and light backgrounds)
                     VStack(spacing: 4) {
                         LatinCrossIcon(size: 36)
                             .foregroundColor(.white)
-                            .shadow(color: .black.opacity(0.3), radius: 5)
+                            .shadow(color: .black.opacity(0.55), radius: 2)
+                            .shadow(color: .black.opacity(0.35), radius: 8)
 
                         Text(viewModel.selectedLanguage == .tamil ? "இயேசுவின் வார்த்தைகள்" : "Jesus Words")
                             .font(.system(size: 32, weight: .bold, design: viewModel.selectedTheme.fontDesign))
                             .foregroundColor(.white)
-                            .shadow(color: .black.opacity(0.3), radius: 5)
+                            .shadow(color: .black.opacity(0.6), radius: 2)
+                            .shadow(color: .black.opacity(0.4), radius: 10)
                     }
                     .padding(.horizontal, 20)
 
@@ -117,15 +119,19 @@ struct HomeView: View {
                             }
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(.white)
+                            .shadow(color: .black.opacity(0.5), radius: 2)
                             .padding(.horizontal, 28)
                             .padding(.vertical, 14)
                             .background(
-                                Capsule()
-                                    .fill(Color.white.opacity(0.2))
+                                ZStack {
+                                    Capsule().fill(.ultraThinMaterial)
+                                    Capsule().fill(Color.black.opacity(0.38))
+                                }
                                     .overlay(
                                         Capsule()
-                                            .stroke(Color.white.opacity(0.4), lineWidth: 1)
+                                            .stroke(Color.white.opacity(0.55), lineWidth: 1.2)
                                     )
+                                    .shadow(color: .black.opacity(0.3), radius: 8, y: 3)
                             )
                         }
                     }
@@ -171,12 +177,17 @@ struct LanguageToggle: View {
             toggleButton(for: .english, label: "En")
             toggleButton(for: .tamil, label: "த")
         }
-        .background(Color.white.opacity(0.15))
-        .clipShape(Capsule())
+        .background(
+            ZStack {
+                Capsule().fill(.ultraThinMaterial)
+                Capsule().fill(Color.black.opacity(0.45))
+            }
+        )
         .overlay(
             Capsule()
-                .stroke(Color.white.opacity(0.3), lineWidth: 1)
+                .stroke(Color.white.opacity(0.55), lineWidth: 1.2)
         )
+        .shadow(color: .black.opacity(0.35), radius: 6, y: 2)
     }
 
     private func toggleButton(for language: AppLanguage, label: String) -> some View {
@@ -187,12 +198,15 @@ struct LanguageToggle: View {
             }
         }) {
             Text(label)
-                .font(.system(size: 13, weight: .bold))
+                .font(.system(size: 14, weight: .bold))
                 .foregroundColor(.white)
-                .padding(.horizontal, 12)
-                .padding(.vertical, 6)
+                .shadow(color: .black.opacity(0.5), radius: 2)
+                .padding(.horizontal, 14)
+                .padding(.vertical, 7)
                 .background(
-                    selectedLanguage == language ? Color.white.opacity(0.3) : Color.clear
+                    selectedLanguage == language
+                        ? Color.white.opacity(0.28)
+                        : Color.clear
                 )
                 .clipShape(Capsule())
         }
