@@ -98,12 +98,22 @@ struct CurrentThemeRow: View {
         }
     }
 
+    @ViewBuilder
     private var themeIcon: some View {
-        Image(systemName: theme.decorativeIcon)
-            .font(.system(size: 28))
-            .foregroundColor(.white)
-            .frame(width: 56, height: 56)
-            .background(iconBackground)
+        if let imageName = theme.backgroundImageName {
+            Image(imageName)
+                .resizable()
+                .scaledToFill()
+                .frame(width: 56, height: 56)
+                .clipShape(Circle())
+                .shadow(color: .black.opacity(0.2), radius: 8, y: 4)
+        } else {
+            Image(systemName: theme.decorativeIcon)
+                .font(.system(size: 28))
+                .foregroundColor(.white)
+                .frame(width: 56, height: 56)
+                .background(iconBackground)
+        }
     }
 
     private var iconBackground: some View {
@@ -163,10 +173,18 @@ struct ThemePreviewCard: View {
 
     private var previewImage: some View {
         ZStack {
-            gradientBackground
-            overlayElements
-            centralIcon
-            lightRays
+            if let imageName = theme.backgroundImageName {
+                Image(imageName)
+                    .resizable()
+                    .scaledToFill()
+                Color.black.opacity(0.15)
+                centralIcon
+            } else {
+                gradientBackground
+                overlayElements
+                centralIcon
+                lightRays
+            }
         }
         .frame(height: 120)
         .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))

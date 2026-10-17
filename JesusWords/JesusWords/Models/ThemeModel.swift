@@ -9,6 +9,7 @@ struct AppTheme: Identifiable, Equatable {
     let fontDesign: Font.Design
     let decorativeIcon: String
     let overlayElements: [ThemeOverlay]
+    var backgroundImageName: String? = nil
 
     static func == (lhs: AppTheme, rhs: AppTheme) -> Bool {
         lhs.id == rhs.id
@@ -288,6 +289,96 @@ class ThemeManager: ObservableObject {
                 ThemeOverlay(systemIcon: "drop.fill", size: 60, opacity: 0.05, xOffset: 0.15, yOffset: 0.55, rotation: -15),
                 ThemeOverlay(systemIcon: "water.waves", size: 200, opacity: 0.05, xOffset: 0.50, yOffset: 0.85, rotation: 0)
             ]
+        ),
+
+        // 13. Gates of Heaven - Golden gates with doves
+        AppTheme(
+            id: "gates_of_heaven",
+            name: "Gates of Heaven",
+            subtitle: "Pearly gates of glory",
+            gradientColors: [
+                Color(red: 1.0, green: 0.95, blue: 0.80),
+                Color(red: 0.95, green: 0.85, blue: 0.55),
+                Color(red: 0.80, green: 0.70, blue: 0.40),
+                Color(red: 0.55, green: 0.45, blue: 0.25)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.70),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "ThemeGatesOfHeaven"
+        ),
+
+        // 14. River of Life - Heavenly waters & gates
+        AppTheme(
+            id: "river_of_life",
+            name: "River of Life",
+            subtitle: "Flowing from the throne",
+            gradientColors: [
+                Color(red: 0.90, green: 0.95, blue: 1.0),
+                Color(red: 0.70, green: 0.85, blue: 0.95),
+                Color(red: 0.50, green: 0.70, blue: 0.90),
+                Color(red: 0.30, green: 0.50, blue: 0.75)
+            ],
+            accentColor: Color(red: 0.95, green: 0.98, blue: 1.0),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "ThemeRiverOfLife"
+        ),
+
+        // 15. The Good Shepherd - Paradise waters
+        AppTheme(
+            id: "good_shepherd",
+            name: "The Good Shepherd",
+            subtitle: "He leads me beside still waters",
+            gradientColors: [
+                Color(red: 0.55, green: 0.90, blue: 0.92),
+                Color(red: 0.35, green: 0.75, blue: 0.85),
+                Color(red: 0.20, green: 0.55, blue: 0.70),
+                Color(red: 0.10, green: 0.35, blue: 0.50)
+            ],
+            accentColor: Color(red: 0.75, green: 0.95, blue: 0.98),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "ThemeGoodShepherd"
+        ),
+
+        // 16. Holy Spirit Glow - Crystal waters & lilies
+        AppTheme(
+            id: "holy_spirit_glow",
+            name: "Holy Spirit Glow",
+            subtitle: "Living waters flowing",
+            gradientColors: [
+                Color(red: 0.95, green: 0.95, blue: 0.85),
+                Color(red: 0.80, green: 0.90, blue: 0.80),
+                Color(red: 0.55, green: 0.80, blue: 0.75),
+                Color(red: 0.30, green: 0.55, blue: 0.65)
+            ],
+            accentColor: Color(red: 1.0, green: 0.98, blue: 0.90),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "ThemeHolySpiritGlow"
+        ),
+
+        // 17. Resurrection Glory - Pastoral sunrise
+        AppTheme(
+            id: "resurrection_glory",
+            name: "Resurrection Glory",
+            subtitle: "New life at sunrise",
+            gradientColors: [
+                Color(red: 1.0, green: 0.90, blue: 0.65),
+                Color(red: 0.95, green: 0.75, blue: 0.50),
+                Color(red: 0.75, green: 0.60, blue: 0.45),
+                Color(red: 0.45, green: 0.45, blue: 0.40)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.75),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "ThemeResurrectionGlory"
         )
     ]
 
