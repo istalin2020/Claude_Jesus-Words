@@ -231,9 +231,9 @@ struct SharePreviewCard: View {
                 }
             }
         }
-        .onAppear { render() }
-        .onChange(of: wallpaper.id) { _ in render() }
-        .onChange(of: language) { _ in render() }
+        // .task(id:) re-runs with the current view values whenever the wallpaper
+        // or language changes; .onChange could render with the previous wallpaper.
+        .task(id: "\(wallpaper.id)|\(language.rawValue)") { render() }
     }
 
     @MainActor
