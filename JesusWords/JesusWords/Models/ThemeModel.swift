@@ -324,7 +324,7 @@ class ThemeManager: ObservableObject {
             fontDesign: .serif,
             decorativeIcon: "sparkles",
             overlayElements: [],
-            backgroundImageName: "ThemeRiverOfLife"
+            backgroundImageName: "Wallpaper2"
         ),
 
         // 15. The Good Shepherd - Paradise waters
@@ -342,7 +342,7 @@ class ThemeManager: ObservableObject {
             fontDesign: .serif,
             decorativeIcon: "sparkles",
             overlayElements: [],
-            backgroundImageName: "ThemeGoodShepherd"
+            backgroundImageName: "Wallpaper3"
         ),
 
         // 16. Holy Spirit Glow - Crystal waters & lilies
@@ -378,7 +378,7 @@ class ThemeManager: ObservableObject {
             fontDesign: .serif,
             decorativeIcon: "sparkles",
             overlayElements: [],
-            backgroundImageName: "ThemeResurrectionGlory"
+            backgroundImageName: "Wallpaper5"
         ),
 
         // 18. Tree of Life - Golden tree with waterfalls
