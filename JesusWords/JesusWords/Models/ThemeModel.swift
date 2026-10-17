@@ -360,7 +360,7 @@ class ThemeManager: ObservableObject {
             fontDesign: .serif,
             decorativeIcon: "sparkles",
             overlayElements: [],
-            backgroundImageName: "ThemeHolySpiritGlow"
+            backgroundImageName: "Wallpaper4"
         ),
 
         // 17. Resurrection Glory - Pastoral sunrise
