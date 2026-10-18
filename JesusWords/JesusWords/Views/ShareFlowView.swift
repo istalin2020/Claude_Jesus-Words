@@ -205,7 +205,7 @@ struct ShareFlowView: View {
     }
 }
 
-// MARK: - Preview card (renders ShareImageView to a bitmap for an accurate scaled preview)
+// MARK: - Preview card (the real 1080x1080 share layout, drawn live and scaled to fit)
 
 struct SharePreviewCard: View {
     let word: JesusWord
@@ -213,36 +213,24 @@ struct SharePreviewCard: View {
     let theme: AppTheme
     let language: AppLanguage
 
-    @State private var rendered: UIImage? = nil
+    private static let canvas: CGFloat = 1080
 
     var body: some View {
-        Group {
-            if let img = rendered {
-                Image(uiImage: img)
-                    .resizable()
-                    .scaledToFill()
-            } else {
-                ZStack {
-                    Image(wallpaper.imageName)
-                        .resizable()
-                        .scaledToFill()
-                    ProgressView()
-                        .tint(.white)
-                }
-            }
+        GeometryReader { geo in
+            let scale = min(geo.size.width, geo.size.height) / Self.canvas
+            ShareImageView(
+                word: word,
+                theme: theme,
+                size: CGSize(width: Self.canvas, height: Self.canvas),
+                appIconImage: UIImage(named: "ShareAppIcon"),
+                language: language,
+                wallpaper: wallpaper
+            )
+            .frame(width: Self.canvas, height: Self.canvas)
+            .scaleEffect(scale, anchor: .topLeading)
+            .frame(width: geo.size.width, height: geo.size.height, alignment: .topLeading)
         }
-        // .task(id:) re-runs with the current view values whenever the wallpaper
-        // or language changes; .onChange could render with the previous wallpaper.
-        .task(id: "\(wallpaper.id)|\(language.rawValue)") { render() }
-    }
-
-    @MainActor
-    private func render() {
-        rendered = ShareImageRenderer.renderImage(
-            word: word,
-            theme: theme,
-            language: language,
-            wallpaper: wallpaper
-        )
+        .id(wallpaper.id + language.rawValue)
+        .allowsHitTesting(false)
     }
 }
