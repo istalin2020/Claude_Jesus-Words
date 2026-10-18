@@ -15,8 +15,11 @@ class WordsViewModel: ObservableObject {
     @Published var themeManager = ThemeManager.shared
     @Published var wallpaperManager = WallpaperManager.shared
     @Published var selectedLanguage: AppLanguage = .english
+    // Newest first.
+    @Published private(set) var favoriteIDs: [Int] = []
 
     private let historyKey = "viewedWordsHistory"
+    private let favoritesKey = "favoriteVerseIDs"
     private let lastDayKey = "lastShownDay"
     private let languageKey = "selectedLanguage"
 
@@ -25,6 +28,27 @@ class WordsViewModel: ObservableObject {
         loadWords()
         loadHistory()
         loadTodaysWord()
+        favoriteIDs = UserDefaults.standard.array(forKey: favoritesKey) as? [Int] ?? []
+    }
+
+    // MARK: - Favourites
+
+    func isFavorite(_ word: JesusWord) -> Bool {
+        favoriteIDs.contains(word.id)
+    }
+
+    func toggleFavorite(_ word: JesusWord) {
+        if let index = favoriteIDs.firstIndex(of: word.id) {
+            favoriteIDs.remove(at: index)
+        } else {
+            favoriteIDs.insert(word.id, at: 0)
+        }
+        UserDefaults.standard.set(favoriteIDs, forKey: favoritesKey)
+    }
+
+    var favoriteWords: [JesusWord] {
+        let byID = Dictionary(allWords.map { ($0.id, $0) }, uniquingKeysWith: { first, _ in first })
+        return favoriteIDs.compactMap { byID[$0] }
     }
 
     var selectedTheme: AppTheme {

@@ -98,6 +98,10 @@ struct HomeView: View {
                                 )
                                 .shadow(color: .black.opacity(0.25), radius: 20, y: 10)
                         )
+                        .overlay(alignment: .topTrailing) {
+                            FavoriteHeartButton(word: word, size: 24)
+                                .padding(10)
+                        }
                         .padding(.horizontal, 20)
                         .scaleEffect(isAnimating ? 1.0 : 0.95)
                         .opacity(isAnimating ? 1.0 : 0.0)

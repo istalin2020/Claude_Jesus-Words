@@ -34,6 +34,7 @@
 		B2000000000000000000004 /* JesusWordsWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = B2100000000000000000004 /* JesusWordsWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2000000000000000000005 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2100000000000000000005 /* WidgetKit.framework */; };
 		B2000000000000000000006 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2100000000000000000006 /* SwiftUI.framework */; };
+		A10000010000000000000022 /* FavoritesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A10000020000000000000022 /* FavoritesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +90,7 @@
 		B2100000000000000000004 /* JesusWordsWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = JesusWordsWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2100000000000000000005 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		B2100000000000000000006 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		A10000020000000000000022 /* FavoritesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				A10000020000000000000019 /* WallpapersView.swift */,
 				A10000020000000000000020 /* ShareFlowView.swift */,
 				A10000020000000000000021 /* LanguageTipView.swift */,
+				A10000020000000000000022 /* FavoritesView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -330,6 +333,7 @@
 				A10000010000000000000019 /* WallpapersView.swift in Sources */,
 				A10000010000000000000020 /* ShareFlowView.swift in Sources */,
 				A10000010000000000000021 /* LanguageTipView.swift in Sources */,
+				A10000010000000000000022 /* FavoritesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
