@@ -9,10 +9,11 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: WordsViewModel
     @State private var isAnimating = false
     @State private var shareFlowWord: JesusWord? = nil
-    // Shown once ever, on first launch. The "_v2" key makes it appear once more
-    // for people who saw the older tip before the angel was added.
-    @AppStorage("hasSeenLanguageTip_v2") private var hasSeenLanguageTip = false
+    // Shown once ever, on first launch. The "_v3" key makes the redesigned tip
+    // appear once more for people who saw an earlier version.
+    @AppStorage("hasSeenLanguageTip_v3") private var hasSeenLanguageTip = false
     @State private var showLanguageTip = false
+    @State private var languageToggleFrame: CGRect = .zero
 
     var body: some View {
         ZStack {
@@ -28,6 +29,11 @@ struct HomeView: View {
                         LanguageToggle(selectedLanguage: $viewModel.selectedLanguage) { language in
                             viewModel.setLanguage(language)
                         }
+                        .background(
+                            GeometryReader { g in
+                                Color.clear.preference(key: LanguageToggleFrameKey.self, value: g.frame(in: .global))
+                            }
+                        )
                     }
                     .padding(.trailing, 24)
                     .padding(.top, 16)
@@ -158,9 +164,10 @@ struct HomeView: View {
             ShareFlowView(word: word, initialWallpaperId: viewModel.selectedWallpaper.id)
                 .environmentObject(viewModel)
         }
+        .onPreferenceChange(LanguageToggleFrameKey.self) { languageToggleFrame = $0 }
         .overlay {
-            if showLanguageTip {
-                LanguageTipView(isTamil: viewModel.selectedLanguage == .tamil) {
+            if showLanguageTip && languageToggleFrame != .zero {
+                LanguageTipView(toggleFrame: languageToggleFrame) {
                     hasSeenLanguageTip = true
                     showLanguageTip = false
                 }
