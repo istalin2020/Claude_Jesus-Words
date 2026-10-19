@@ -86,21 +86,23 @@ struct TabButtonFramesKey: PreferenceKey {
     }
 }
 
-/// First-launch tip shown after the language tip: the angel points down at the
-/// real Themes tab, which glows through a spotlight in the dimmed screen.
+/// First-launch tip shown after the language tip: the sleeping-angel artwork sits
+/// above the tab bar and a curved arrow ends at the real Themes tab, which glows
+/// through a spotlight in the dimmed screen.
 struct ThemesTipView: View {
     /// Themes tab button frame in global coordinates.
     let tabFrame: CGRect
-    let isTamil: Bool
     let onDismiss: () -> Void
 
     @State private var appeared = false
 
-    private let cream = Color(red: 1.0, green: 0.98, blue: 0.92)
-    private let gold = Color(red: 0.86, green: 0.64, blue: 0.22)
-    private let goldLight = Color(red: 0.98, green: 0.82, blue: 0.42)
-    private let goldDark = Color(red: 0.72, green: 0.50, blue: 0.14)
-    private let purple = Color(red: 0.55, green: 0.18, blue: 0.75)
+    // Artwork geometry, in pixels of ThemesTipArt.png.
+    private static let artSize = CGSize(width: 881, height: 555)
+    /// Where the arrow leaves the art (just under the Got it button).
+    private static let artArrowStart = CGPoint(x: 322, y: 540)
+
+    private let glow = Color(red: 1.0, green: 0.84, blue: 0.45)
+    private let arrowColor = Color(red: 1.0, green: 0.97, blue: 0.88)
 
     var body: some View {
         GeometryReader { geo in
@@ -108,9 +110,14 @@ struct ThemesTipView: View {
             let tab = tabFrame.offsetBy(dx: -origin.x, dy: -origin.y)
             let side = max(tab.width, tab.height) + 16
             let hole = CGRect(x: tab.midX - side / 2, y: tab.midY - side / 2, width: side, height: side)
-            let cardBottom = hole.minY - 64
-            let cardWidth = min(geo.size.width - 48, 380)
-            let arrowStart = CGPoint(x: geo.size.width / 2 - 40, y: cardBottom + 6)
+
+            let artWidth = min(geo.size.width - 16, 440)
+            let scale = artWidth / Self.artSize.width
+            let artHeight = Self.artSize.height * scale
+            let artX = (geo.size.width - artWidth) / 2
+            let artY = hole.minY - 56 - artHeight
+            let arrowStart = CGPoint(x: artX + Self.artArrowStart.x * scale,
+                                     y: artY + Self.artArrowStart.y * scale)
             let arrowEnd = CGPoint(x: hole.midX, y: hole.minY - 4)
 
             ZStack(alignment: .topLeading) {
@@ -120,99 +127,31 @@ struct ThemesTipView: View {
                     .onTapGesture { dismiss() }
 
                 Circle()
-                    .stroke(goldLight, lineWidth: 2.5)
-                    .shadow(color: goldLight.opacity(0.9), radius: 10)
-                    .shadow(color: goldLight.opacity(0.6), radius: 20)
+                    .stroke(glow, lineWidth: 2.5)
+                    .shadow(color: glow.opacity(0.9), radius: 10)
+                    .shadow(color: glow.opacity(0.6), radius: 20)
                     .frame(width: hole.width, height: hole.height)
                     .offset(x: hole.minX, y: hole.minY)
                     .allowsHitTesting(false)
 
                 CurvedArrow(start: arrowStart, end: arrowEnd)
-                    .stroke(cream, style: StrokeStyle(lineWidth: 3.5, lineCap: .round, lineJoin: .round))
-                    .shadow(color: goldLight, radius: 6)
+                    .stroke(arrowColor, style: StrokeStyle(lineWidth: 3.5, lineCap: .round, lineJoin: .round))
+                    .shadow(color: glow, radius: 6)
                     .allowsHitTesting(false)
 
-                VStack {
-                    Spacer(minLength: 0)
-                    card
-                        .frame(width: cardWidth)
-                        .overlay(alignment: .topLeading) {
-                            Image("TipAngel")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 130)
-                                .offset(x: -30, y: -92)
-                                .shadow(color: goldLight.opacity(0.6), radius: 10)
-                                .allowsHitTesting(false)
-                        }
-                        .padding(.bottom, geo.size.height - cardBottom)
-                }
-                .frame(width: geo.size.width)
+                Image("ThemesTipArt")
+                    .resizable()
+                    .frame(width: artWidth, height: artHeight)
+                    .offset(x: artX, y: artY)
+                    .onTapGesture { dismiss() }
+                    .accessibilityLabel("Tip: Explore the Themes tab below to discover beautiful new themes for your daily Bible verses. Got it.")
+                    .accessibilityAddTraits(.isButton)
             }
             .opacity(appeared ? 1 : 0)
             .animation(.easeOut(duration: 0.35), value: appeared)
         }
         .ignoresSafeArea()
         .onAppear { appeared = true }
-    }
-
-    private var message: Text {
-        if isTamil {
-            return Text("உங்கள் தினசரி வேதவசனங்களுக்கான அழகிய புதிய தீம்களைக் கண்டறிய கீழே உள்ள ")
-                + Text("தீம்கள்").foregroundColor(purple).bold()
-                + Text(" தாவலைப் பாருங்கள்.")
-        }
-        return Text("Explore the ")
-            + Text("Themes").foregroundColor(purple).bold()
-            + Text(" tab below to discover beautiful new themes for your daily Bible verses.")
-    }
-
-    private var card: some View {
-        VStack(spacing: 14) {
-            HStack(spacing: 10) {
-                Image(systemName: "sparkle").font(.system(size: 14))
-                Text(isTamil ? "குறிப்பு:" : "Tip:")
-                    .font(.system(size: 30, weight: .bold, design: .serif))
-                Image(systemName: "sparkle").font(.system(size: 14))
-            }
-            .foregroundColor(goldDark)
-            .padding(.leading, 40) // room for the angel
-
-            message
-                .font(.system(size: 17, weight: .medium, design: .serif))
-                .foregroundColor(Color(red: 0.25, green: 0.17, blue: 0.08))
-                .multilineTextAlignment(.center)
-                .lineSpacing(3)
-                .fixedSize(horizontal: false, vertical: true)
-
-            Button(action: dismiss) {
-                Text(isTamil ? "புரிந்தது" : "Got it")
-                    .font(.system(size: 20, weight: .bold, design: .serif))
-                    .foregroundColor(.white)
-                    .frame(maxWidth: 220)
-                    .padding(.vertical, 12)
-                    .background(
-                        Capsule()
-                            .fill(LinearGradient(colors: [goldLight, goldDark], startPoint: .top, endPoint: .bottom))
-                            .shadow(color: goldDark.opacity(0.5), radius: 6, y: 3)
-                    )
-                    .overlay(Capsule().stroke(goldLight, lineWidth: 1.5))
-            }
-            .buttonStyle(.plain)
-        }
-        .padding(.horizontal, 22)
-        .padding(.top, 22)
-        .padding(.bottom, 20)
-        .frame(maxWidth: .infinity)
-        .background(
-            RoundedRectangle(cornerRadius: 26, style: .continuous)
-                .fill(cream)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 26, style: .continuous)
-                        .stroke(LinearGradient(colors: [goldLight, gold], startPoint: .top, endPoint: .bottom), lineWidth: 2.5)
-                )
-                .shadow(color: goldLight.opacity(0.7), radius: 22)
-        )
     }
 
     private func dismiss() {

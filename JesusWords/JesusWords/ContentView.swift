@@ -5,7 +5,7 @@ struct ContentView: View {
     @State private var selectedTab = 0
     // First-launch tips: language tip (HomeView) first, then this Themes tip.
     @AppStorage("hasSeenLanguageTip_v3") private var hasSeenLanguageTip = false
-    @AppStorage("hasSeenThemesTip_v1") private var hasSeenThemesTip = false
+    @AppStorage("hasSeenThemesTip_v2") private var hasSeenThemesTip = false
     @State private var showThemesTip = false
     @State private var tabFrames: [Int: CGRect] = [:]
 
@@ -55,7 +55,7 @@ struct ContentView: View {
         }
         .overlay {
             if showThemesTip, let frame = tabFrames[2] {
-                ThemesTipView(tabFrame: frame, isTamil: isTamil) { finishThemesTip() }
+                ThemesTipView(tabFrame: frame) { finishThemesTip() }
                     .transition(.opacity)
             }
         }
