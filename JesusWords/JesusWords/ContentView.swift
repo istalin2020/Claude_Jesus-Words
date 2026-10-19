@@ -3,6 +3,11 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject var viewModel: WordsViewModel
     @State private var selectedTab = 0
+    // First-launch tips: language tip (HomeView) first, then this Themes tip.
+    @AppStorage("hasSeenLanguageTip_v3") private var hasSeenLanguageTip = false
+    @AppStorage("hasSeenThemesTip_v1") private var hasSeenThemesTip = false
+    @State private var showThemesTip = false
+    @State private var tabFrames: [Int: CGRect] = [:]
 
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -42,6 +47,30 @@ struct ContentView: View {
             .padding(.horizontal, 16)
             .padding(.bottom, 20)
         }
+        .onPreferenceChange(TabButtonFramesKey.self) { tabFrames = $0 }
+        .onAppear { scheduleThemesTip() }
+        .onChange(of: hasSeenLanguageTip) { _ in scheduleThemesTip() }
+        .onChange(of: selectedTab) { tab in
+            if tab == 2 { finishThemesTip() }
+        }
+        .overlay {
+            if showThemesTip, let frame = tabFrames[2] {
+                ThemesTipView(tabFrame: frame, isTamil: isTamil) { finishThemesTip() }
+                    .transition(.opacity)
+            }
+        }
+    }
+
+    private func scheduleThemesTip() {
+        guard hasSeenLanguageTip, !hasSeenThemesTip, !showThemesTip else { return }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) {
+            if !hasSeenThemesTip { showThemesTip = true }
+        }
+    }
+
+    private func finishThemesTip() {
+        hasSeenThemesTip = true
+        showThemesTip = false
     }
 
     private var isTamil: Bool { viewModel.selectedLanguage == .tamil }
@@ -65,5 +94,10 @@ struct ContentView: View {
             .foregroundColor(selectedTab == tag ? .white : .white.opacity(0.5))
             .frame(maxWidth: .infinity)
         }
+        .background(
+            GeometryReader { g in
+                Color.clear.preference(key: TabButtonFramesKey.self, value: [tag: g.frame(in: .global)])
+            }
+        )
     }
 }
