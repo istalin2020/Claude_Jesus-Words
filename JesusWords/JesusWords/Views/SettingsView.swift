@@ -135,7 +135,7 @@ struct SettingsView: View {
                             )
                             aboutRow(
                                 label: isTamil ? "பதிப்பு" : "Version",
-                                value: "1.0.0"
+                                value: "1.1"
                             )
                         }
                     }
