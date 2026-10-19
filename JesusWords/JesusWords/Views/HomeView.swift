@@ -9,7 +9,8 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: WordsViewModel
     @State private var isAnimating = false
     @State private var shareFlowWord: JesusWord? = nil
-    @AppStorage("hasSeenLanguageTip") private var hasSeenLanguageTip = false
+    // Shown once per app launch (resets when the app is relaunched).
+    private static var languageTipShownThisLaunch = false
     @State private var showLanguageTip = false
 
     var body: some View {
@@ -146,7 +147,8 @@ struct HomeView: View {
             withAnimation {
                 isAnimating = true
             }
-            if !hasSeenLanguageTip {
+            if !Self.languageTipShownThisLaunch {
+                Self.languageTipShownThisLaunch = true
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                     showLanguageTip = true
                 }
@@ -159,7 +161,6 @@ struct HomeView: View {
         .overlay {
             if showLanguageTip {
                 LanguageTipView(isTamil: viewModel.selectedLanguage == .tamil) {
-                    hasSeenLanguageTip = true
                     showLanguageTip = false
                 }
                 .transition(.opacity)
