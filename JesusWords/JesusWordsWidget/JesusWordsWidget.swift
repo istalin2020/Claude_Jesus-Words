@@ -47,7 +47,8 @@ enum VerseLanguage: String, AppEnum {
     ]
 }
 
-enum VerseDesign: String, AppEnum {
+enum VerseDesign: String, AppEnum, CaseIterable {
+    case dailySurprise
     case gatesOfHeaven, riverOfLife, goodShepherd, holySpirit, resurrection
     case treeOfLife, newJerusalem, stillWaters, starOfBethlehem, rainbowPromise
     case easterDawn, crystalParadise, pentecostLight
@@ -56,6 +57,7 @@ enum VerseDesign: String, AppEnum {
 
     static var typeDisplayRepresentation: TypeDisplayRepresentation = "Design"
     static var caseDisplayRepresentations: [VerseDesign: DisplayRepresentation] = [
+        .dailySurprise: "Daily Surprise (new every day)",
         .gatesOfHeaven: "Gates of Heaven",
         .riverOfLife: "River of Life",
         .goodShepherd: "The Good Shepherd",
@@ -82,6 +84,19 @@ enum VerseDesign: String, AppEnum {
     ]
 
     var imageName: String { "Widget_\(rawValue)" }
+
+    /// The real background to show on `date`. Daily Surprise walks through all
+    /// backgrounds in a shuffled order: never the same two days in a row, and
+    /// every background appears once before any repeats.
+    func resolved(for date: Date) -> VerseDesign {
+        guard self == .dailySurprise else { return self }
+        let pool = Self.allCases.filter { $0 != .dailySurprise }
+        let day = Calendar.current.ordinality(of: .day, in: .year, for: date) ?? 1
+        let year = Calendar.current.component(.year, from: date)
+        // 7 shares no factor with the pool size (23), so this visits every
+        // background once per cycle; the year offset varies the order yearly.
+        return pool[(day * 7 + year) % pool.count]
+    }
 }
 
 struct VerseWidgetIntent: WidgetConfigurationIntent {
@@ -91,7 +106,7 @@ struct VerseWidgetIntent: WidgetConfigurationIntent {
     @Parameter(title: "Language", default: .english)
     var language: VerseLanguage
 
-    @Parameter(title: "Design", default: .holySpirit)
+    @Parameter(title: "Design", default: .dailySurprise)
     var design: VerseDesign
 }
 
@@ -106,7 +121,7 @@ struct VerseEntry: TimelineEntry {
 
 struct VerseProvider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> VerseEntry {
-        VerseEntry(date: .now, verse: VerseStore.verse(for: .now), language: .english, design: .holySpirit)
+        VerseEntry(date: .now, verse: VerseStore.verse(for: .now), language: .english, design: VerseDesign.dailySurprise.resolved(for: .now))
     }
 
     func snapshot(for configuration: VerseWidgetIntent, in context: Context) async -> VerseEntry {
@@ -126,7 +141,7 @@ struct VerseProvider: AppIntentTimelineProvider {
 
     private func entry(for configuration: VerseWidgetIntent, at date: Date) -> VerseEntry {
         VerseEntry(date: date, verse: VerseStore.verse(for: date),
-                   language: configuration.language, design: configuration.design)
+                   language: configuration.language, design: configuration.design.resolved(for: date))
     }
 }
 
