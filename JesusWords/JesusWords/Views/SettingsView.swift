@@ -2,6 +2,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var viewModel: WordsViewModel
+    @AppStorage("hasSeenLanguageTip_v3") private var hasSeenLanguageTip = false
+    @AppStorage("hasSeenThemesTip_v2") private var hasSeenThemesTip = false
     @State private var selectedTime = Date()
     @State private var showingSaved = false
 
@@ -72,6 +74,30 @@ struct SettingsView: View {
                                     .stroke(Color.white.opacity(0.28), lineWidth: 1)
                             )
                     )
+                    .padding(.horizontal, 16)
+
+                    // Replay the first-launch tips (switches to Today and shows them in order)
+                    Button {
+                        hasSeenThemesTip = false
+                        hasSeenLanguageTip = false
+                    } label: {
+                        HStack(spacing: 10) {
+                            Image(systemName: "lightbulb.fill")
+                            Text(isTamil ? "குறிப்புகளை மீண்டும் காட்டு" : "Show Tips Again")
+                            Spacer()
+                            Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold))
+                        }
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                        .padding(18)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.ultraThinMaterial)
+                                .overlay(RoundedRectangle(cornerRadius: 20).fill(Color.black.opacity(0.22)))
+                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white.opacity(0.28), lineWidth: 1))
+                        )
+                    }
+                    .buttonStyle(.plain)
                     .padding(.horizontal, 16)
 
                     // About Section

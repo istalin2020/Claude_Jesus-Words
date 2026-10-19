@@ -165,6 +165,11 @@ struct HomeView: View {
                 .environmentObject(viewModel)
         }
         .onPreferenceChange(LanguageToggleFrameKey.self) { languageToggleFrame = $0 }
+        .onChange(of: hasSeenLanguageTip) { seen in
+            if !seen {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { showLanguageTip = true }
+            }
+        }
         .overlay {
             if showLanguageTip && languageToggleFrame != .zero {
                 LanguageTipView(toggleFrame: languageToggleFrame) {

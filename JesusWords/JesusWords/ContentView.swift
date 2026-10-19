@@ -49,7 +49,13 @@ struct ContentView: View {
         }
         .onPreferenceChange(TabButtonFramesKey.self) { tabFrames = $0 }
         .onAppear { scheduleThemesTip() }
-        .onChange(of: hasSeenLanguageTip) { _ in scheduleThemesTip() }
+        .onChange(of: hasSeenLanguageTip) { seen in
+            if seen {
+                scheduleThemesTip()
+            } else {
+                withAnimation { selectedTab = 0 }   // "Show Tips Again" from Settings
+            }
+        }
         .onChange(of: selectedTab) { tab in
             if tab == 2 { finishThemesTip() }
         }
