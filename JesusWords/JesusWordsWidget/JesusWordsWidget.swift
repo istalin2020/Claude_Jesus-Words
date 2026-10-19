@@ -91,7 +91,7 @@ struct VerseWidgetIntent: WidgetConfigurationIntent {
     @Parameter(title: "Language", default: .english)
     var language: VerseLanguage
 
-    @Parameter(title: "Design", default: .gatesOfHeaven)
+    @Parameter(title: "Design", default: .holySpirit)
     var design: VerseDesign
 }
 
@@ -106,7 +106,7 @@ struct VerseEntry: TimelineEntry {
 
 struct VerseProvider: AppIntentTimelineProvider {
     func placeholder(in context: Context) -> VerseEntry {
-        VerseEntry(date: .now, verse: VerseStore.verse(for: .now), language: .english, design: .gatesOfHeaven)
+        VerseEntry(date: .now, verse: VerseStore.verse(for: .now), language: .english, design: .holySpirit)
     }
 
     func snapshot(for configuration: VerseWidgetIntent, in context: Context) async -> VerseEntry {
