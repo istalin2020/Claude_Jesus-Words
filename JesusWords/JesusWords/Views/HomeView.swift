@@ -9,8 +9,9 @@ struct HomeView: View {
     @EnvironmentObject var viewModel: WordsViewModel
     @State private var isAnimating = false
     @State private var shareFlowWord: JesusWord? = nil
-    // Shown once per app launch (resets when the app is relaunched).
-    private static var languageTipShownThisLaunch = false
+    // Shown once ever, on first launch. The "_v2" key makes it appear once more
+    // for people who saw the older tip before the angel was added.
+    @AppStorage("hasSeenLanguageTip_v2") private var hasSeenLanguageTip = false
     @State private var showLanguageTip = false
 
     var body: some View {
@@ -147,8 +148,7 @@ struct HomeView: View {
             withAnimation {
                 isAnimating = true
             }
-            if !Self.languageTipShownThisLaunch {
-                Self.languageTipShownThisLaunch = true
+            if !hasSeenLanguageTip {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.9) {
                     showLanguageTip = true
                 }
@@ -161,6 +161,7 @@ struct HomeView: View {
         .overlay {
             if showLanguageTip {
                 LanguageTipView(isTamil: viewModel.selectedLanguage == .tamil) {
+                    hasSeenLanguageTip = true
                     showLanguageTip = false
                 }
                 .transition(.opacity)
