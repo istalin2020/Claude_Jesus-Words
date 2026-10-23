@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "WallpaperLavenderGrace.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperLavenderGrace_iPad.png",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

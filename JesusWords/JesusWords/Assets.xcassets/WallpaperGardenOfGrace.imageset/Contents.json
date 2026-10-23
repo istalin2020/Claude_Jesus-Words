@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "WallpaperGardenOfGrace.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperGardenOfGrace_iPad.png",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

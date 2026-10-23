@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "WallpaperCrystalParadise.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperCrystalParadise_iPad.png",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

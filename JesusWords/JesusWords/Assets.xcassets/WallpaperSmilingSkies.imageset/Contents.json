@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "WallpaperSmilingSkies.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperSmilingSkies_iPad.png",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

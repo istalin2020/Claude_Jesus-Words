@@ -2,8 +2,12 @@ import SwiftUI
 
 struct SettingsView: View {
     @EnvironmentObject var viewModel: WordsViewModel
+    @AppStorage("hasSeenLanguageTip_v3") private var hasSeenLanguageTip = false
+    @AppStorage("hasSeenThemesTip_v2") private var hasSeenThemesTip = false
     @State private var selectedTime = Date()
     @State private var showingSaved = false
+
+    private var isTamil: Bool { viewModel.selectedLanguage == .tamil }
 
     var body: some View {
         ZStack {
@@ -13,10 +17,10 @@ struct SettingsView: View {
                 VStack(spacing: 24) {
                     // Header
                     VStack(spacing: 8) {
-                        Text("Settings")
+                        Text(isTamil ? "அமைப்புகள்" : "Settings")
                             .font(.system(size: 32, weight: .bold, design: viewModel.selectedTheme.fontDesign))
                             .foregroundColor(.white)
-                        Text("Customize your experience")
+                        Text(isTamil ? "உங்கள் அனுபவத்தைத் தனிப்பயனாக்குங்கள்" : "Customize your experience")
                             .font(.subheadline)
                             .foregroundColor(.white.opacity(0.8))
                     }
@@ -27,7 +31,7 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "bell.fill")
                                 .foregroundColor(.white)
-                            Text("Reminder Time")
+                            Text(isTamil ? "நினைவூட்டல் நேரம்" : "Reminder Time")
                                 .font(.system(size: 18, weight: .semibold, design: viewModel.selectedTheme.fontDesign))
                                 .foregroundColor(.white)
                             Spacer()
@@ -41,7 +45,9 @@ struct SettingsView: View {
                         Button(action: saveReminder) {
                             HStack {
                                 Image(systemName: showingSaved ? "checkmark.circle.fill" : "bell.badge")
-                                Text(showingSaved ? "Saved!" : "Update Reminder")
+                                Text(showingSaved
+                                    ? (isTamil ? "சேமிக்கப்பட்டது!" : "Saved!")
+                                    : (isTamil ? "நினைவூட்டலைப் புதுப்பி" : "Update Reminder"))
                             }
                             .font(.system(size: 16, weight: .semibold))
                             .foregroundColor(.white)
@@ -55,10 +61,43 @@ struct SettingsView: View {
                         }
                     }
                     .padding(20)
+                    .frame(maxWidth: .infinity)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
                             .fill(.ultraThinMaterial)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color.black.opacity(0.22))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.white.opacity(0.28), lineWidth: 1)
+                            )
                     )
+                    .padding(.horizontal, 16)
+
+                    // Replay the first-launch tips (switches to Today and shows them in order)
+                    Button {
+                        hasSeenThemesTip = false
+                        hasSeenLanguageTip = false
+                    } label: {
+                        HStack(spacing: 10) {
+                            Image(systemName: "lightbulb.fill")
+                            Text(isTamil ? "குறிப்புகளை மீண்டும் காட்டு" : "Show Tips Again")
+                            Spacer()
+                            Image(systemName: "chevron.right").font(.system(size: 13, weight: .semibold))
+                        }
+                        .font(.system(size: 16, weight: .semibold))
+                        .foregroundColor(.white)
+                        .padding(18)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20)
+                                .fill(.ultraThinMaterial)
+                                .overlay(RoundedRectangle(cornerRadius: 20).fill(Color.black.opacity(0.22)))
+                                .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white.opacity(0.28), lineWidth: 1))
+                        )
+                    }
+                    .buttonStyle(.plain)
                     .padding(.horizontal, 16)
 
                     // About Section
@@ -66,13 +105,15 @@ struct SettingsView: View {
                         HStack {
                             Image(systemName: "info.circle.fill")
                                 .foregroundColor(.white)
-                            Text("About")
+                            Text(isTamil ? "பற்றி" : "About")
                                 .font(.system(size: 18, weight: .semibold, design: viewModel.selectedTheme.fontDesign))
                                 .foregroundColor(.white)
                             Spacer()
                         }
 
-                        Text("Jesus Words brings you 365 authentic spoken words of Jesus Christ from the New Testament. Start each day with His wisdom, comfort, and encouragement.")
+                        Text(isTamil
+                            ? "இயேசுவின் வார்த்தைகள் புதிய ஏற்பாட்டிலிருந்து இயேசு கிறிஸ்துவின் 365 உண்மையான வார்த்தைகளை உங்களுக்குக் கொண்டுவருகிறது. ஒவ்வொரு நாளையும் அவரது ஞானம், ஆறுதல் மற்றும் ஊக்கத்துடன் தொடங்குங்கள்."
+                            : "Jesus Words brings you 365 authentic spoken words of Jesus Christ from the New Testament. Start each day with His wisdom, comfort, and encouragement.")
                             .font(.system(size: 14, design: viewModel.selectedTheme.fontDesign))
                             .foregroundColor(.white.opacity(0.8))
                             .lineSpacing(4)
@@ -80,16 +121,37 @@ struct SettingsView: View {
                         Divider().background(Color.white.opacity(0.3))
 
                         VStack(spacing: 8) {
-                            aboutRow(label: "Total Words", value: "365")
-                            aboutRow(label: "Categories", value: "8")
-                            aboutRow(label: "Source", value: "New Testament (NIV)")
-                            aboutRow(label: "Version", value: "1.0.0")
+                            aboutRow(
+                                label: isTamil ? "மொத்த வார்த்தைகள்" : "Total Words",
+                                value: "365"
+                            )
+                            aboutRow(
+                                label: isTamil ? "வகைகள்" : "Categories",
+                                value: "8"
+                            )
+                            aboutRow(
+                                label: isTamil ? "ஆதாரம்" : "Source",
+                                value: isTamil ? "புதிய ஏற்பாடு (NIV)" : "New Testament (NIV)"
+                            )
+                            aboutRow(
+                                label: isTamil ? "பதிப்பு" : "Version",
+                                value: "1.1"
+                            )
                         }
                     }
                     .padding(20)
+                    .frame(maxWidth: .infinity)
                     .background(
                         RoundedRectangle(cornerRadius: 20)
                             .fill(.ultraThinMaterial)
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .fill(Color.black.opacity(0.22))
+                            )
+                            .overlay(
+                                RoundedRectangle(cornerRadius: 20)
+                                    .stroke(Color.white.opacity(0.28), lineWidth: 1)
+                            )
                     )
                     .padding(.horizontal, 16)
 

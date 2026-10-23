@@ -9,6 +9,7 @@ struct AppTheme: Identifiable, Equatable {
     let fontDesign: Font.Design
     let decorativeIcon: String
     let overlayElements: [ThemeOverlay]
+    var backgroundImageName: String? = nil
 
     static func == (lhs: AppTheme, rhs: AppTheme) -> Bool {
         lhs.id == rhs.id
@@ -288,6 +289,330 @@ class ThemeManager: ObservableObject {
                 ThemeOverlay(systemIcon: "drop.fill", size: 60, opacity: 0.05, xOffset: 0.15, yOffset: 0.55, rotation: -15),
                 ThemeOverlay(systemIcon: "water.waves", size: 200, opacity: 0.05, xOffset: 0.50, yOffset: 0.85, rotation: 0)
             ]
+        ),
+
+        // 13. Gates of Heaven - Golden gates with doves
+        AppTheme(
+            id: "gates_of_heaven",
+            name: "Gates of Heaven",
+            subtitle: "Pearly gates of glory",
+            gradientColors: [
+                Color(red: 1.0, green: 0.95, blue: 0.80),
+                Color(red: 0.95, green: 0.85, blue: 0.55),
+                Color(red: 0.80, green: 0.70, blue: 0.40),
+                Color(red: 0.55, green: 0.45, blue: 0.25)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.70),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "ThemeGatesOfHeaven"
+        ),
+
+        // 14. River of Life - Heavenly waters & gates
+        AppTheme(
+            id: "river_of_life",
+            name: "River of Life",
+            subtitle: "Flowing from the throne",
+            gradientColors: [
+                Color(red: 0.90, green: 0.95, blue: 1.0),
+                Color(red: 0.70, green: 0.85, blue: 0.95),
+                Color(red: 0.50, green: 0.70, blue: 0.90),
+                Color(red: 0.30, green: 0.50, blue: 0.75)
+            ],
+            accentColor: Color(red: 0.95, green: 0.98, blue: 1.0),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "Wallpaper2"
+        ),
+
+        // 15. The Good Shepherd - Paradise waters
+        AppTheme(
+            id: "good_shepherd",
+            name: "The Good Shepherd",
+            subtitle: "He leads me beside still waters",
+            gradientColors: [
+                Color(red: 0.55, green: 0.90, blue: 0.92),
+                Color(red: 0.35, green: 0.75, blue: 0.85),
+                Color(red: 0.20, green: 0.55, blue: 0.70),
+                Color(red: 0.10, green: 0.35, blue: 0.50)
+            ],
+            accentColor: Color(red: 0.75, green: 0.95, blue: 0.98),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "Wallpaper3"
+        ),
+
+        // 16. Holy Spirit Glow - Crystal waters & lilies
+        AppTheme(
+            id: "holy_spirit_glow",
+            name: "Holy Spirit Glow",
+            subtitle: "Living waters flowing",
+            gradientColors: [
+                Color(red: 0.95, green: 0.95, blue: 0.85),
+                Color(red: 0.80, green: 0.90, blue: 0.80),
+                Color(red: 0.55, green: 0.80, blue: 0.75),
+                Color(red: 0.30, green: 0.55, blue: 0.65)
+            ],
+            accentColor: Color(red: 1.0, green: 0.98, blue: 0.90),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "Wallpaper4"
+        ),
+
+        // 17. Resurrection Glory - Pastoral sunrise
+        AppTheme(
+            id: "resurrection_glory",
+            name: "Resurrection Glory",
+            subtitle: "New life at sunrise",
+            gradientColors: [
+                Color(red: 1.0, green: 0.90, blue: 0.65),
+                Color(red: 0.95, green: 0.75, blue: 0.50),
+                Color(red: 0.75, green: 0.60, blue: 0.45),
+                Color(red: 0.45, green: 0.45, blue: 0.40)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.75),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "Wallpaper5"
+        ),
+
+        // 18. Tree of Life - Golden tree with waterfalls
+        AppTheme(
+            id: "tree_of_life",
+            name: "Tree of Life",
+            subtitle: "Heavenly tree of eternal life",
+            gradientColors: [
+                Color(red: 1.0, green: 0.92, blue: 0.65),
+                Color(red: 0.90, green: 0.75, blue: 0.45),
+                Color(red: 0.55, green: 0.70, blue: 0.65),
+                Color(red: 0.25, green: 0.45, blue: 0.55)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.70),
+            fontDesign: .serif,
+            decorativeIcon: "tree.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperTreeOfLife"
+        ),
+
+        // 19. New Jerusalem - Heavenly golden city
+        AppTheme(
+            id: "new_jerusalem",
+            name: "New Jerusalem",
+            subtitle: "The holy city above the clouds",
+            gradientColors: [
+                Color(red: 1.0, green: 0.95, blue: 0.80),
+                Color(red: 0.95, green: 0.85, blue: 0.55),
+                Color(red: 0.85, green: 0.75, blue: 0.45),
+                Color(red: 0.50, green: 0.55, blue: 0.65)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.75),
+            fontDesign: .serif,
+            decorativeIcon: "building.columns.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperNewJerusalem"
+        ),
+
+        // 20. Still Waters - Peaceful lake sunrise
+        AppTheme(
+            id: "still_waters",
+            name: "Still Waters",
+            subtitle: "He restores my soul",
+            gradientColors: [
+                Color(red: 0.65, green: 0.80, blue: 0.95),
+                Color(red: 0.95, green: 0.80, blue: 0.60),
+                Color(red: 0.80, green: 0.75, blue: 0.65),
+                Color(red: 0.40, green: 0.55, blue: 0.70)
+            ],
+            accentColor: Color(red: 0.95, green: 0.90, blue: 0.80),
+            fontDesign: .serif,
+            decorativeIcon: "water.waves",
+            overlayElements: [],
+            backgroundImageName: "WallpaperStillWaters"
+        ),
+
+        // 21. Star of Bethlehem - Night sky over Bethlehem
+        AppTheme(
+            id: "star_of_bethlehem",
+            name: "Star of Bethlehem",
+            subtitle: "A light shining in the darkness",
+            gradientColors: [
+                Color(red: 0.10, green: 0.15, blue: 0.40),
+                Color(red: 0.08, green: 0.12, blue: 0.30),
+                Color(red: 0.15, green: 0.15, blue: 0.35),
+                Color(red: 0.05, green: 0.08, blue: 0.20)
+            ],
+            accentColor: Color(red: 1.0, green: 0.90, blue: 0.60),
+            fontDesign: .serif,
+            decorativeIcon: "star.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperStarOfBethlehem"
+        ),
+
+        // 22. Rainbow Promise - Covenant rainbow over valley
+        AppTheme(
+            id: "rainbow_promise",
+            name: "Rainbow Promise",
+            subtitle: "God's covenant of mercy",
+            gradientColors: [
+                Color(red: 0.70, green: 0.85, blue: 0.95),
+                Color(red: 0.95, green: 0.80, blue: 0.85),
+                Color(red: 0.90, green: 0.85, blue: 0.60),
+                Color(red: 0.45, green: 0.70, blue: 0.75)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.85),
+            fontDesign: .serif,
+            decorativeIcon: "rainbow",
+            overlayElements: [],
+            backgroundImageName: "WallpaperRainbowPromise"
+        ),
+
+        // 23. Easter Dawn - Empty tomb at pink sunrise
+        AppTheme(
+            id: "easter_dawn",
+            name: "Easter Dawn",
+            subtitle: "He is risen",
+            gradientColors: [
+                Color(red: 1.0, green: 0.80, blue: 0.75),
+                Color(red: 0.95, green: 0.70, blue: 0.65),
+                Color(red: 0.85, green: 0.60, blue: 0.60),
+                Color(red: 0.55, green: 0.35, blue: 0.40)
+            ],
+            accentColor: Color(red: 1.0, green: 0.92, blue: 0.85),
+            fontDesign: .serif,
+            decorativeIcon: "sunrise.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperEasterDawn"
+        ),
+
+        // 24. Crystal Paradise - Clear turquoise paradise waters
+        AppTheme(
+            id: "crystal_paradise",
+            name: "Crystal Paradise",
+            subtitle: "Clear waters of paradise",
+            gradientColors: [
+                Color(red: 0.85, green: 0.95, blue: 0.95),
+                Color(red: 0.55, green: 0.90, blue: 0.90),
+                Color(red: 0.30, green: 0.70, blue: 0.80),
+                Color(red: 0.15, green: 0.45, blue: 0.60)
+            ],
+            accentColor: Color(red: 0.90, green: 0.98, blue: 1.0),
+            fontDesign: .serif,
+            decorativeIcon: "water.waves",
+            overlayElements: [],
+            backgroundImageName: "WallpaperCrystalParadise"
+        ),
+
+        // 25. Pentecost Light - Dove in pink/purple clouds
+        AppTheme(
+            id: "pentecost_light",
+            name: "Pentecost Light",
+            subtitle: "The Spirit descends",
+            gradientColors: [
+                Color(red: 1.0, green: 0.90, blue: 0.95),
+                Color(red: 0.95, green: 0.80, blue: 0.95),
+                Color(red: 0.75, green: 0.65, blue: 0.90),
+                Color(red: 0.45, green: 0.35, blue: 0.65)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 1.0),
+            fontDesign: .serif,
+            decorativeIcon: "sparkles",
+            overlayElements: [],
+            backgroundImageName: "WallpaperPentecostLight"
+        ),
+
+        // 26. Sacred Heart Cathedral - Red stained glass sanctuary
+        AppTheme(
+            id: "sacred_heart_cathedral",
+            name: "Sacred Heart Cathedral",
+            subtitle: "Sacred sanctuary of grace",
+            gradientColors: [
+                Color(red: 1.0, green: 0.85, blue: 0.60),
+                Color(red: 0.95, green: 0.55, blue: 0.45),
+                Color(red: 0.75, green: 0.20, blue: 0.25),
+                Color(red: 0.45, green: 0.10, blue: 0.15)
+            ],
+            accentColor: Color(red: 1.0, green: 0.90, blue: 0.75),
+            fontDesign: .serif,
+            decorativeIcon: "building.columns.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperSacredHeartCathedral"
+        ),
+
+        // 27. Crown of Glory - Purple heavenly throne
+        AppTheme(
+            id: "crown_of_glory",
+            name: "Crown of Glory",
+            subtitle: "Royal throne of heaven",
+            gradientColors: [
+                Color(red: 1.0, green: 0.90, blue: 0.95),
+                Color(red: 0.90, green: 0.80, blue: 0.95),
+                Color(red: 0.70, green: 0.60, blue: 0.90),
+                Color(red: 0.40, green: 0.30, blue: 0.70)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 1.0),
+            fontDesign: .serif,
+            decorativeIcon: "crown.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperCrownOfGlory"
+        ),
+
+        // 28. Nativity Star - Deep blue night with golden star
+        AppTheme(
+            id: "nativity_star",
+            name: "Nativity Star",
+            subtitle: "The star that led the wise",
+            gradientColors: [
+                Color(red: 0.60, green: 0.75, blue: 0.95),
+                Color(red: 0.25, green: 0.40, blue: 0.75),
+                Color(red: 0.10, green: 0.20, blue: 0.50),
+                Color(red: 0.05, green: 0.10, blue: 0.30)
+            ],
+            accentColor: Color(red: 1.0, green: 0.92, blue: 0.65),
+            fontDesign: .serif,
+            decorativeIcon: "star.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperNativityStar"
+        ),
+
+        // 29. Rose of Sharon - Pink roses archway
+        AppTheme(
+            id: "rose_of_sharon",
+            name: "Rose of Sharon",
+            subtitle: "Beauty of the Beloved",
+            gradientColors: [
+                Color(red: 1.0, green: 0.90, blue: 0.85),
+                Color(red: 1.0, green: 0.75, blue: 0.75),
+                Color(red: 0.95, green: 0.60, blue: 0.65),
+                Color(red: 0.70, green: 0.40, blue: 0.50)
+            ],
+            accentColor: Color(red: 1.0, green: 0.95, blue: 0.90),
+            fontDesign: .serif,
+            decorativeIcon: "camera.macro",
+            overlayElements: [],
+            backgroundImageName: "WallpaperRoseOfSharon"
+        ),
+
+        // 30. Garden of Grace - Green garden with cross and fountain
+        AppTheme(
+            id: "garden_of_grace",
+            name: "Garden of Grace",
+            subtitle: "Living waters flow here",
+            gradientColors: [
+                Color(red: 0.90, green: 0.95, blue: 0.80),
+                Color(red: 0.70, green: 0.85, blue: 0.65),
+                Color(red: 0.40, green: 0.70, blue: 0.50),
+                Color(red: 0.20, green: 0.45, blue: 0.35)
+            ],
+            accentColor: Color(red: 0.95, green: 1.0, blue: 0.90),
+            fontDesign: .serif,
+            decorativeIcon: "leaf.fill",
+            overlayElements: [],
+            backgroundImageName: "WallpaperGardenOfGrace"
         )
     ]
 

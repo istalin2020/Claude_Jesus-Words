@@ -7,30 +7,57 @@ struct ShareImageView: View {
     let theme: AppTheme
     let size: CGSize
     let appIconImage: UIImage?
+    var language: AppLanguage = .english
+    var wallpaper: Wallpaper? = nil
 
-    /// Adaptive font size based on quote length (scaled for 1080 image rendering)
-    private var quoteFontSize: CGFloat {
-        let length = word.quote.count
-        if length < 80 { return 72 }
-        if length < 120 { return 64 }
-        if length < 180 { return 56 }
-        if length < 280 { return 48 }
-        if length < 400 { return 42 }
-        return 36
+    private var displayQuote: String {
+        if language == .tamil, let tq = word.tamilQuote { return tq }
+        return word.quote
     }
 
-    private var quoteLineSpacing: CGFloat {
-        let length = word.quote.count
-        if length < 120 { return 28 }
-        if length < 250 { return 22 }
-        return 16
+    private var displayTheme: String {
+        if language == .tamil, let tt = word.tamilTheme { return tt }
+        return word.theme
+    }
+
+    private var displayCategory: String {
+        language == .tamil ? word.tamilCategoryDisplay : word.categoryDisplay
+    }
+
+    private var displayReference: String {
+        if language == .tamil, let tr = word.tamilReference { return tr }
+        return word.reference
+    }
+
+    // Fixed layout heights (based on 1080x1080)
+    private var topSectionHeight: CGFloat { size.height * 0.18 }
+    private var bottomSectionHeight: CGFloat { size.height * 0.13 }
+    private var verticalPadding: CGFloat { size.height * 0.05 }
+    private var cardGap: CGFloat { size.height * 0.02 }
+
+    private var cardMaxHeight: CGFloat {
+        size.height - topSectionHeight - bottomSectionHeight - (verticalPadding * 2) - (cardGap * 2)
     }
 
     var body: some View {
         ZStack {
-            themeBackground
-            decorativeOverlays
-            lightRaysEffect
+            if let wallpaper = wallpaper {
+                wallpaperBackground(wallpaper)
+                // Soft dark gradient overlay for text readability
+                LinearGradient(
+                    gradient: Gradient(colors: [
+                        Color.black.opacity(0.15),
+                        Color.black.opacity(0.35),
+                        Color.black.opacity(0.15)
+                    ]),
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            } else {
+                themeBackground
+                decorativeOverlays
+                lightRaysEffect
+            }
             contentLayout
         }
         .frame(width: size.width, height: size.height)
@@ -44,6 +71,14 @@ struct ShareImageView: View {
             startPoint: .topLeading,
             endPoint: .bottomTrailing
         )
+    }
+
+    private func wallpaperBackground(_ wallpaper: Wallpaper) -> some View {
+        Image(wallpaper.imageName)
+            .resizable()
+            .scaledToFill()
+            .frame(width: size.width, height: size.height)
+            .clipped()
     }
 
     // MARK: - Decorative Overlays
@@ -83,69 +118,71 @@ struct ShareImageView: View {
 
     private var contentLayout: some View {
         VStack(spacing: 0) {
-            // Top cross icon
-            topCrossIcon
+            // Top section: cross + title (fixed height)
+            topSection
+                .frame(height: topSectionHeight)
 
-            Spacer().frame(height: 16)
+            Spacer().frame(height: cardGap)
 
-            // "Jesus Words" title
-            jesusWordsTitle
-
-            Spacer().frame(height: size.height * 0.025)
-
-            // Main card with quote content
+            // Card: fills remaining space, text shrinks to fit
             quoteCard
+                .frame(maxHeight: cardMaxHeight)
 
-            Spacer().frame(height: size.height * 0.025)
+            Spacer().frame(height: cardGap)
 
-            // Bottom branding with app icon at bottom left
+            // Bottom branding (fixed height)
             bottomBranding
+                .frame(height: bottomSectionHeight)
         }
         .padding(.horizontal, 52)
-        .padding(.top, size.height * 0.07)
-        .padding(.bottom, size.height * 0.06)
+        .padding(.vertical, verticalPadding)
     }
 
-    private var topCrossIcon: some View {
-        LatinCrossIcon(size: 72)
-            .foregroundColor(.white.opacity(0.92))
-            .shadow(color: .black.opacity(0.25), radius: 6)
+    // MARK: - Top Section (fixed)
+
+    private var topSection: some View {
+        VStack(spacing: 12) {
+            Spacer(minLength: 0)
+            LatinCrossIcon(size: 72)
+                .foregroundColor(.white.opacity(0.92))
+                .shadow(color: .black.opacity(0.25), radius: 6)
+            Text(language == .tamil ? "இயேசுவின் வார்த்தைகள்" : "Jesus Words")
+                .font(.system(size: 56, weight: .bold, design: .serif))
+                .foregroundColor(.white)
+                .shadow(color: .black.opacity(0.2), radius: 4)
+                .minimumScaleFactor(0.7)
+                .lineLimit(1)
+        }
     }
 
-    private var jesusWordsTitle: some View {
-        Text("Jesus Words")
-            .font(.system(size: 56, weight: .bold, design: .serif))
-            .foregroundColor(.white)
-            .shadow(color: .black.opacity(0.2), radius: 4)
-    }
-
-    // MARK: - Quote Card
+    // MARK: - Quote Card (flexible, text shrinks to fit)
 
     private var quoteCard: some View {
         VStack(spacing: 0) {
-            Spacer().frame(height: 36)
+            Spacer(minLength: 4)
 
             categoryBadge
 
-            Spacer().frame(height: 20)
+            Spacer(minLength: 4)
 
             themeTitle
 
-            Spacer().frame(height: 16)
+            Spacer(minLength: 2)
 
             decorativeDivider
 
-            Spacer().frame(height: 24)
+            Spacer(minLength: 4)
 
             quoteText
 
-            Spacer().frame(height: 24)
+            Spacer(minLength: 4)
 
             referenceText
 
-            Spacer().frame(height: 36)
+            Spacer(minLength: 4)
         }
         .padding(.horizontal, 40)
+        .padding(.vertical, 16)
         .frame(maxWidth: .infinity)
         .background(
             RoundedRectangle(cornerRadius: 28, style: .continuous)
@@ -160,22 +197,26 @@ struct ShareImageView: View {
     private var categoryBadge: some View {
         HStack(spacing: 10) {
             Text(word.categoryEmoji)
-                .font(.system(size: 36))
-            Text(word.categoryDisplay)
-                .font(.system(size: 32, weight: .semibold, design: .serif))
+                .font(.system(size: 30))
+            Text(displayCategory)
+                .font(.system(size: 28, weight: .semibold, design: .serif))
                 .foregroundColor(.white)
+                .lineLimit(1)
+                .minimumScaleFactor(0.6)
         }
-        .padding(.horizontal, 28)
-        .padding(.vertical, 12)
+        .padding(.horizontal, 24)
+        .padding(.vertical, 10)
         .background(Color.white.opacity(0.15))
         .clipShape(Capsule())
     }
 
     private var themeTitle: some View {
-        Text(word.theme)
-            .font(.system(size: 52, weight: .bold, design: .serif))
+        Text(displayTheme)
+            .font(.system(size: 48, weight: .bold, design: .serif))
             .foregroundColor(.white)
             .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .minimumScaleFactor(0.5)
             .shadow(color: .black.opacity(0.15), radius: 3)
     }
 
@@ -194,28 +235,29 @@ struct ShareImageView: View {
     }
 
     private var quoteText: some View {
-        Text("\u{201C}\(word.quote)\u{201D}")
-            .font(.system(size: quoteFontSize, weight: .medium, design: .serif))
+        Text("\u{201C}\(displayQuote)\u{201D}")
+            .font(.system(size: 52, weight: .medium, design: .serif))
             .italic()
             .foregroundColor(.white)
             .multilineTextAlignment(.center)
-            .lineSpacing(quoteLineSpacing)
-            .fixedSize(horizontal: false, vertical: true)
+            .lineSpacing(10)
+            .minimumScaleFactor(0.3)
             .shadow(color: .black.opacity(0.1), radius: 2)
     }
 
     private var referenceText: some View {
-        Text("— \(word.reference)")
-            .font(.system(size: 40, weight: .semibold, design: .serif))
+        Text("— \(displayReference)")
+            .font(.system(size: 36, weight: .semibold, design: .serif))
             .italic()
             .foregroundColor(.white.opacity(0.80))
+            .lineLimit(1)
+            .minimumScaleFactor(0.5)
     }
 
-    // MARK: - Bottom Branding (Actual App Icon at bottom left)
+    // MARK: - Bottom Branding (fixed)
 
     private var bottomBranding: some View {
         HStack(spacing: 14) {
-            // Use UIImage-based loading for ImageRenderer compatibility
             if let uiImage = appIconImage {
                 Image(uiImage: uiImage)
                     .resizable()
@@ -229,9 +271,13 @@ struct ShareImageView: View {
                 Text("Jesus Words")
                     .font(.system(size: 34, weight: .bold, design: .serif))
                     .foregroundColor(.white)
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
                 Text("Daily Blessings")
                     .font(.system(size: 22, weight: .regular, design: .serif))
                     .foregroundColor(.white.opacity(0.55))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.6)
             }
 
             Spacer()
@@ -242,26 +288,25 @@ struct ShareImageView: View {
 // MARK: - Image Renderer
 
 struct ShareImageRenderer {
-    /// Load the app icon as UIImage (asset catalog Image() doesn't work with ImageRenderer)
     private static func loadAppIcon() -> UIImage? {
         UIImage(named: "ShareAppIcon")
     }
 
     @MainActor
-    static func renderImage(word: JesusWord, theme: AppTheme) -> UIImage? {
-        let size = CGSize(width: 1080, height: 1080) // Square IG Post
+    static func renderImage(word: JesusWord, theme: AppTheme, language: AppLanguage = .english, wallpaper: Wallpaper? = nil) -> UIImage? {
+        let size = CGSize(width: 1080, height: 1080)
         let appIcon = loadAppIcon()
-        let view = ShareImageView(word: word, theme: theme, size: size, appIconImage: appIcon)
+        let view = ShareImageView(word: word, theme: theme, size: size, appIconImage: appIcon, language: language, wallpaper: wallpaper)
         let renderer = ImageRenderer(content: view)
         renderer.scale = 1.0
         return renderer.uiImage
     }
 
     @MainActor
-    static func renderSquareImage(word: JesusWord, theme: AppTheme) -> UIImage? {
-        let size = CGSize(width: 1080, height: 1080) // Square post size
+    static func renderSquareImage(word: JesusWord, theme: AppTheme, language: AppLanguage = .english, wallpaper: Wallpaper? = nil) -> UIImage? {
+        let size = CGSize(width: 1080, height: 1080)
         let appIcon = loadAppIcon()
-        let view = ShareImageView(word: word, theme: theme, size: size, appIconImage: appIcon)
+        let view = ShareImageView(word: word, theme: theme, size: size, appIconImage: appIcon, language: language, wallpaper: wallpaper)
         let renderer = ImageRenderer(content: view)
         renderer.scale = 1.0
         return renderer.uiImage

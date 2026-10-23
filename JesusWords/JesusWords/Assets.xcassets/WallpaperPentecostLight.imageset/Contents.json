@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "WallpaperPentecostLight.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperPentecostLight_iPad.png",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

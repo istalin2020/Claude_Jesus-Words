@@ -1,0 +1,16 @@
+{
+  "images" : [
+    {
+      "filename" : "WallpaperStillWaters.png",
+      "idiom" : "universal"
+    },
+    {
+      "filename" : "WallpaperStillWaters_iPad.png",
+      "idiom" : "ipad"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

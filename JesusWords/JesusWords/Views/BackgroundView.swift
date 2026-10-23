@@ -98,57 +98,74 @@ struct ThemeBackgroundView: View {
 
     var body: some View {
         ZStack {
-            // Main gradient
-            LinearGradient(
-                gradient: Gradient(colors: theme.gradientColors),
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-            .ignoresSafeArea()
+            if let imageName = theme.backgroundImageName {
+                // Color.clear takes exactly the proposed size; the image lives in an
+                // overlay so its scaled-to-fill size can never widen the layout.
+                Color.clear
+                    .overlay(
+                        Image(imageName)
+                            .resizable()
+                            .scaledToFill()
+                    )
+                    .clipped()
+                    .ignoresSafeArea()
 
-            // Decorative overlay elements
-            GeometryReader { geo in
-                ForEach(Array(theme.overlayElements.enumerated()), id: \.offset) { _, overlay in
-                    ThemeIcon(systemName: overlay.systemIcon)
-                        .frame(width: overlay.size, height: overlay.size)
-                        .foregroundColor(.white.opacity(overlay.opacity))
-                        .rotationEffect(.degrees(overlay.rotation))
-                        .position(
-                            x: geo.size.width * overlay.xOffset,
-                            y: geo.size.height * overlay.yOffset
-                        )
-                }
-            }
-            .ignoresSafeArea()
+                // Subtle dark overlay for text readability
+                Color.black.opacity(0.15)
+                    .ignoresSafeArea()
+            } else {
+                // Main gradient
+                LinearGradient(
+                    gradient: Gradient(colors: theme.gradientColors),
+                    startPoint: .topLeading,
+                    endPoint: .bottomTrailing
+                )
+                .ignoresSafeArea()
 
-            // Cross watermark
-            VStack {
-                Spacer()
-                LatinCrossShape()
-                    .fill(Color.white.opacity(0.04))
-                    .aspectRatio(0.55, contentMode: .fit)
-                    .frame(height: 200)
-                    .rotationEffect(.degrees(-15))
-                Spacer()
-            }
-
-            // Light rays effect
-            GeometryReader { geo in
-                Path { path in
-                    let center = CGPoint(x: geo.size.width * 0.75, y: -50)
-                    for i in stride(from: 0, to: 360, by: 30) {
-                        let angle = Double(i) * .pi / 180
-                        let length = max(geo.size.width, geo.size.height) * 1.5
-                        path.move(to: center)
-                        path.addLine(to: CGPoint(
-                            x: center.x + cos(angle) * length,
-                            y: center.y + sin(angle) * length
-                        ))
+                // Decorative overlay elements
+                GeometryReader { geo in
+                    ForEach(Array(theme.overlayElements.enumerated()), id: \.offset) { _, overlay in
+                        ThemeIcon(systemName: overlay.systemIcon)
+                            .frame(width: overlay.size, height: overlay.size)
+                            .foregroundColor(.white.opacity(overlay.opacity))
+                            .rotationEffect(.degrees(overlay.rotation))
+                            .position(
+                                x: geo.size.width * overlay.xOffset,
+                                y: geo.size.height * overlay.yOffset
+                            )
                     }
                 }
-                .stroke(Color.white.opacity(0.03), lineWidth: 40)
+                .ignoresSafeArea()
+
+                // Cross watermark
+                VStack {
+                    Spacer()
+                    LatinCrossShape()
+                        .fill(Color.white.opacity(0.04))
+                        .aspectRatio(0.55, contentMode: .fit)
+                        .frame(height: 200)
+                        .rotationEffect(.degrees(-15))
+                    Spacer()
+                }
+
+                // Light rays effect
+                GeometryReader { geo in
+                    Path { path in
+                        let center = CGPoint(x: geo.size.width * 0.75, y: -50)
+                        for i in stride(from: 0, to: 360, by: 30) {
+                            let angle = Double(i) * .pi / 180
+                            let length = max(geo.size.width, geo.size.height) * 1.5
+                            path.move(to: center)
+                            path.addLine(to: CGPoint(
+                                x: center.x + cos(angle) * length,
+                                y: center.y + sin(angle) * length
+                            ))
+                        }
+                    }
+                    .stroke(Color.white.opacity(0.03), lineWidth: 40)
+                }
+                .ignoresSafeArea()
             }
-            .ignoresSafeArea()
         }
     }
 }
